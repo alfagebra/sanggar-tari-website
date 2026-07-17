@@ -1490,6 +1490,7 @@ textarea.form-control {
     }
     .map-container-wrapper .map-container iframe {
         height: 360px;
+        min-height: 360px;
     }
     .contact-info-card {
         padding: 30px 24px;
