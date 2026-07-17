@@ -148,9 +148,9 @@
                 
                 <div class="footer-contact">
                     <h4>{{ __('Hubungi Kami') }}</h4>
-                    <p>📍 {{ $layoutProfile->address ?? 'Yogyakarta, Indonesia' }}</p>
-                    <p>📞 {{ $layoutProfile->phone ?? '0812-3456-7890' }}</p>
-                    <p>✉️ {{ $layoutProfile->email ?? 'info@sanggartari.com' }}</p>
+                    <p><strong>{{ __('Alamat:') }}</strong> {{ $layoutProfile->address ?? 'Yogyakarta, Indonesia' }}</p>
+                    <p><strong>{{ __('Telepon:') }}</strong> {{ $layoutProfile->phone ?? '0812-3456-7890' }}</p>
+                    <p><strong>{{ __('Email:') }}</strong> {{ $layoutProfile->email ?? 'info@sanggartari.com' }}</p>
                 </div>
             </div>
             

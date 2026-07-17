@@ -41,7 +41,7 @@
                                         {{ $schedule->time }}
                                     </td>
                                     <td>
-                                        👤 {{ $schedule->instructor ?? __('Pelatih Sanggar') }}
+                                        {{ $schedule->instructor ?? __('Pelatih Sanggar') }}
                                     </td>
                                     <td style="color: var(--text-muted); font-size: 0.9rem;">
                                         {{ $schedule->description ?? '-' }}

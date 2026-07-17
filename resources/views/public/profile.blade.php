@@ -13,7 +13,7 @@
         <div style="max-width: 900px; margin: 0 auto;">
             <!-- Sejarah -->
             <div class="profile-section-item">
-                <h3>📜 {{ __('Sejarah Singkat') }}</h3>
+                <h3>{{ __('Sejarah Singkat') }}</h3>
                 <div style="line-height: 1.8; color: var(--text-dark); font-size: 1.05rem;">
                     @if($profile && $profile->history)
                         {!! nl2br(e($profile->history)) !!}
@@ -26,7 +26,7 @@
             <!-- Visi & Misi -->
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-top: 30px;">
                 <div class="profile-section-item" style="margin-bottom: 0;">
-                    <h3>🎯 {{ __('Visi Sanggar') }}</h3>
+                    <h3>{{ __('Visi Sanggar') }}</h3>
                     <p style="font-size: 1.05rem; line-height: 1.8;">
                         @if($profile && $profile->vision)
                             {{ $profile->vision }}
@@ -37,7 +37,7 @@
                 </div>
                 
                 <div class="profile-section-item" style="margin-bottom: 0;">
-                    <h3>🚀 {{ __('Misi Sanggar') }}</h3>
+                    <h3>{{ __('Misi Sanggar') }}</h3>
                     <div style="font-size: 1.05rem; line-height: 1.8;">
                         @if($profile && $profile->mission)
                             {!! nl2br(e($profile->mission)) !!}
@@ -50,20 +50,20 @@
 
             <!-- Informasi Kontak & Sosial Media -->
             <div class="profile-section-item" style="margin-top: 30px; text-align: center; border-left: none; border-top: 5px solid var(--secondary);">
-                <h3>📞 {{ __('Hubungi Kami') }}</h3>
+                <h3>{{ __('Hubungi Kami') }}</h3>
                 <p style="margin-bottom: 24px; color: var(--text-muted);">{{ __('Silakan datang langsung ke sanggar kami atau hubungi kami melalui media sosial di bawah ini.') }}</p>
                 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; text-align: left; margin-bottom: 24px;">
                     <div style="background: var(--light); padding: 16px; border-radius: var(--radius); border: 1px solid var(--border);">
-                        <strong>📍 {{ __('Alamat Sanggar:') }}</strong>
+                        <strong>{{ __('Alamat Sanggar:') }}</strong>
                         <p style="margin-top: 8px; font-size: 0.95rem;">{{ $profile->address ?? __('Alamat belum diisi') }}</p>
                     </div>
                     <div style="background: var(--light); padding: 16px; border-radius: var(--radius); border: 1px solid var(--border);">
-                        <strong>📞 {{ __('No. Telepon/WhatsApp:') }}</strong>
+                        <strong>{{ __('No. Telepon/WhatsApp:') }}</strong>
                         <p style="margin-top: 8px; font-size: 0.95rem;">{{ $profile->phone ?? __('Belum diisi') }}</p>
                     </div>
                     <div style="background: var(--light); padding: 16px; border-radius: var(--radius); border: 1px solid var(--border);">
-                        <strong>✉️ {{ __('Email Resmi:') }}</strong>
+                        <strong>{{ __('Email Resmi:') }}</strong>
                         <p style="margin-top: 8px; font-size: 0.95rem;">{{ $profile->email ?? __('Belum diisi') }}</p>
                     </div>
                 </div>

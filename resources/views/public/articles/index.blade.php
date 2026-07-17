@@ -35,7 +35,7 @@
                             </h3>
                             <p class="card-desc">{{ Str::limit(strip_tags($article->content), 150) }}</p>
                             <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 16px; margin-top: 16px; font-size: 0.85rem; color: var(--text-muted);">
-                                <span>📅 {{ $article->created_at->format('d M Y') }}</span>
+                                <span>{{ $article->created_at->format('d M Y') }}</span>
                                 <a href="{{ $article->source_url ?? route('articles.show', $article->slug) }}" target="{{ $article->source_url ? '_blank' : '_self' }}" style="color: var(--primary); font-weight: 700;">{{ __('Baca Detail') }} &rarr;</a>
                             </div>
                         </div>
