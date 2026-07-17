@@ -28,29 +28,29 @@
             
             <ul class="sidebar-menu">
                 <li class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-                    <a href="{{ route('admin.dashboard') }}">📊 Ikhtisar</a>
+                    <a href="{{ route('admin.dashboard') }}">Ikhtisar</a>
                 </li>
                 <li class="{{ request()->routeIs('admin.profile') ? 'active' : '' }}">
-                    <a href="{{ route('admin.profile') }}">🏢 Profil Sanggar</a>
+                    <a href="{{ route('admin.profile') }}">Profil Sanggar</a>
                 </li>
                 <li class="{{ request()->routeIs('admin.articles') || request()->routeIs('admin.articles.*') ? 'active' : '' }}">
-                    <a href="{{ route('admin.articles') }}">📰 Kelola Artikel</a>
+                    <a href="{{ route('admin.articles') }}">Kelola Artikel</a>
                 </li>
                 <li class="{{ request()->routeIs('admin.galleries') || request()->routeIs('admin.galleries.*') ? 'active' : '' }}">
-                    <a href="{{ route('admin.galleries') }}">📸 Kelola Galeri</a>
+                    <a href="{{ route('admin.galleries') }}">Kelola Galeri</a>
                 </li>
                 <li class="{{ request()->routeIs('admin.schedules') || request()->routeIs('admin.schedules.*') ? 'active' : '' }}">
-                    <a href="{{ route('admin.schedules') }}">📅 Kelola Jadwal</a>
+                    <a href="{{ route('admin.schedules') }}">Kelola Jadwal</a>
                 </li>
                 <li>
-                    <a href="{{ route('home') }}" target="_blank">🌐 Lihat Website</a>
+                    <a href="{{ route('home') }}" target="_blank">Lihat Website</a>
                 </li>
             </ul>
             
             <div class="sidebar-footer">
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <button type="submit" class="logout-btn">🚪 Keluar (Logout)</button>
+                    <button type="submit" class="logout-btn">Keluar (Logout)</button>
                 </form>
             </div>
         </aside>
@@ -69,25 +69,25 @@
             <nav class="admin-mobile-nav">
                 <ul class="admin-mobile-links">
                     <li class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-                        <a href="{{ route('admin.dashboard') }}">📊 {{ __('Ikhtisar') }}</a>
+                        <a href="{{ route('admin.dashboard') }}">{{ __('Ikhtisar') }}</a>
                     </li>
                     <li class="{{ request()->routeIs('admin.profile') ? 'active' : '' }}">
-                        <a href="{{ route('admin.profile') }}">🏢 {{ __('Profil') }}</a>
+                        <a href="{{ route('admin.profile') }}">{{ __('Profil') }}</a>
                     </li>
                     <li class="{{ request()->routeIs('admin.articles') || request()->routeIs('admin.articles.*') ? 'active' : '' }}">
-                        <a href="{{ route('admin.articles') }}">📰 {{ __('Artikel') }}</a>
+                        <a href="{{ route('admin.articles') }}">{{ __('Artikel') }}</a>
                     </li>
                     <li class="{{ request()->routeIs('admin.galleries') || request()->routeIs('admin.galleries.*') ? 'active' : '' }}">
-                        <a href="{{ route('admin.galleries') }}">📸 {{ __('Galeri') }}</a>
+                        <a href="{{ route('admin.galleries') }}">{{ __('Galeri') }}</a>
                     </li>
                     <li class="{{ request()->routeIs('admin.schedules') || request()->routeIs('admin.schedules.*') ? 'active' : '' }}">
-                        <a href="{{ route('admin.schedules') }}">📅 {{ __('Jadwal') }}</a>
+                        <a href="{{ route('admin.schedules') }}">{{ __('Jadwal') }}</a>
                     </li>
                     <li>
-                        <a href="{{ route('home') }}" target="_blank">🌐 {{ __('Lihat Web') }}</a>
+                        <a href="{{ route('home') }}" target="_blank">{{ __('Lihat Web') }}</a>
                     </li>
                     <li>
-                        <a href="#" onclick="event.preventDefault(); document.getElementById('admin-mobile-logout-form').submit();" style="color: #e53935;">🚪 {{ __('Keluar') }}</a>
+                        <a href="#" onclick="event.preventDefault(); document.getElementById('admin-mobile-logout-form').submit();" style="color: #e53935;">{{ __('Keluar') }}</a>
                     </li>
                 </ul>
                 <form id="admin-mobile-logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
