@@ -16,7 +16,7 @@
 
         <!-- Main Image -->
         @if($article->image_url)
-            <img src="{{ Str::startsWith($article->image_url, ['http://', 'https://']) ? $article->image_url : asset('storage/' . $article->image_url) }}" alt="{{ $article->title }}" class="article-detail-img">
+            <img src="{{ Str::startsWith($article->image_url, ['http://', 'https://']) ? $article->image_url : Storage::url($article->image_url) }}" alt="{{ $article->title }}" class="article-detail-img">
         @endif
 
         <!-- Content -->
@@ -39,7 +39,7 @@
                         @if($recent->image_url)
                             <div class="card-img-wrapper">
                                 <a href="{{ $recent->source_url ?? route('articles.show', $recent->slug) }}" target="{{ $recent->source_url ? '_blank' : '_self' }}">
-                                    <img src="{{ Str::startsWith($recent->image_url, ['http://', 'https://']) ? $recent->image_url : asset('storage/' . $recent->image_url) }}" alt="{{ $recent->title }}">
+                                    <img src="{{ Str::startsWith($recent->image_url, ['http://', 'https://']) ? $recent->image_url : Storage::url($recent->image_url) }}" alt="{{ $recent->title }}">
                                 </a>
                             </div>
                         @endif

@@ -19,7 +19,7 @@
             <div class="gallery-grid">
                 @foreach($galleries as $gallery)
                     <div class="gallery-item">
-                        <img src="{{ Str::startsWith($gallery->image_url, ['http://', 'https://']) ? $gallery->image_url : asset('storage/' . $gallery->image_url) }}" alt="{{ $gallery->title }}">
+                        <img src="{{ Str::startsWith($gallery->image_url, ['http://', 'https://']) ? $gallery->image_url : Storage::url($gallery->image_url) }}" alt="{{ $gallery->title }}">
                         <div class="gallery-overlay">
                             <h4>{{ $gallery->title }}</h4>
                             <p>{{ $gallery->description ?? __('Dokumentasi Sanggar Tari') }}</p>

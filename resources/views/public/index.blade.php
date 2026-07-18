@@ -30,7 +30,7 @@
             @else
                 @foreach($galleries->take(5) as $key => $gallery)
                     <div class="slide-item {{ $key === 0 ? 'active' : '' }}">
-                        <img src="{{ Str::startsWith($gallery->image_url, ['http://', 'https://']) ? $gallery->image_url : asset('storage/' . $gallery->image_url) }}" alt="{{ $gallery->title }}">
+                        <img src="{{ Str::startsWith($gallery->image_url, ['http://', 'https://']) ? $gallery->image_url : Storage::url($gallery->image_url) }}" alt="{{ $gallery->title }}">
                         <div class="slide-caption">
                             <span class="slide-tag">{{ __('Sorotan Kegiatan') }}</span>
                             <h3>{{ $gallery->title }}</h3>
@@ -72,7 +72,7 @@
                         @if($article->image_url)
                             <div class="blog-card-img-wrapper">
                                 <a href="{{ $article->source_url ?? route('articles.show', $article->slug) }}" target="{{ $article->source_url ? '_blank' : '_self' }}">
-                                    <img src="{{ Str::startsWith($article->image_url, ['http://', 'https://']) ? $article->image_url : asset('storage/' . $article->image_url) }}" alt="{{ $article->title }}">
+                                    <img src="{{ Str::startsWith($article->image_url, ['http://', 'https://']) ? $article->image_url : Storage::url($article->image_url) }}" alt="{{ $article->title }}">
                                 </a>
                             </div>
                         @endif
@@ -111,7 +111,7 @@
                 @foreach($galleries->take(3) as $gallery)
                     <div class="blog-card">
                         <div class="blog-card-img-wrapper" style="height: 260px;">
-                            <img src="{{ Str::startsWith($gallery->image_url, ['http://', 'https://']) ? $gallery->image_url : asset('storage/' . $gallery->image_url) }}" alt="{{ $gallery->title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                            <img src="{{ Str::startsWith($gallery->image_url, ['http://', 'https://']) ? $gallery->image_url : Storage::url($gallery->image_url) }}" alt="{{ $gallery->title }}" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
                         <span class="blog-card-tag" style="color: var(--secondary);">{{ __('Galeri Pentas') }}</span>
                         <h3 class="blog-card-title">{{ $gallery->title }}</h3>

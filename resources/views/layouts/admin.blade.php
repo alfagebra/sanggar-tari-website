@@ -19,7 +19,7 @@
         <aside class="sidebar">
             <div class="sidebar-logo">
                 @if($adminProfile && $adminProfile->logo_url)
-                    <img src="{{ Str::startsWith($adminProfile->logo_url, ['http://', 'https://']) ? $adminProfile->logo_url : asset('storage/' . $adminProfile->logo_url) }}" alt="Logo">
+                    <img src="{{ Str::startsWith($adminProfile->logo_url, ['http://', 'https://']) ? $adminProfile->logo_url : Storage::url($adminProfile->logo_url) }}" alt="Logo">
                 @else
                     <div style="background: var(--secondary); color: var(--dark); font-weight: 800; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 1rem;">A</div>
                 @endif

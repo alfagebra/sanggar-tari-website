@@ -10,7 +10,8 @@
     "VIEW_COMPILED_PATH": "/tmp/views",
     "CACHE_STORE": "database",
     "SESSION_DRIVER": "cookie",
-    "LOG_CHANNEL": "stderr"
+    "LOG_CHANNEL": "stderr",
+    "AWS_URL": "https://dxzcskcdtoaauabfoyfx.storage.supabase.co/storage/v1/object/public/sanggar"
   },
   "functions": {
     "api/*.php": {
