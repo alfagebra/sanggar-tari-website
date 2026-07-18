@@ -11,7 +11,8 @@
     "CACHE_STORE": "database",
     "SESSION_DRIVER": "cookie",
     "LOG_CHANNEL": "stderr",
-    "AWS_URL": "https://dxzcskcdtoaauabfoyfx.storage.supabase.co/storage/v1/object/public/sanggar"
+    "AWS_URL": "https://dxzcskcdtoaauabfoyfx.storage.supabase.co/storage/v1/object/public/sanggar",
+    "AWS_DEFAULT_REGION": "ap-northeast-2"
   },
   "functions": {
     "api/*.php": {
