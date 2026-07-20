@@ -15,7 +15,8 @@ class PublicController extends Controller
         $profile = Profile::first();
         $articles = Article::latest()->take(3)->get();
         $galleries = Gallery::latest()->take(6)->get();
-        return view('public.index', compact('profile', 'articles', 'galleries'));
+        $schedules = Schedule::orderBy('day')->get();
+        return view('public.index', compact('profile', 'articles', 'galleries', 'schedules'));
     }
 
     public function profile()

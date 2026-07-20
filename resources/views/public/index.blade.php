@@ -82,7 +82,7 @@
         <h2 class="home-section-title">{{ __('Jadwal') }} <span class="text-gold">{{ __('Latihan') }}</span></h2>
         <p style="color: var(--text-muted); margin-top: -24px; margin-bottom: 30px;">{{ __('Terbuka untuk umum setiap akhir pekan.') }}</p>
 
-        @if($schedules->isEmpty())
+        @if(!isset($schedules) || $schedules->isEmpty())
             <div class="schedule-list-wrapper">
                 <div class="schedule-item-card">
                     <div class="schedule-left-info">
