@@ -11,18 +11,18 @@
         @else
             <img class="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjwrYrlFEbog22tccAN7BuaR-Aa3OM7_DStrWexJyRjRvokmAA07bqNdVS-977-yjsuj00oUkDzjK1JbERGO4y0EXsPY9_SZJ-38KWUMZDB_u3TpayONXHBPU2xxFXaeCNvjefSGYL6N-_yLcpI0lsC3_CzcyPNX81H5Oc0_1NFyLHFKpJGKVv35ppr4eByRPEOK2rHCTdCUfm_RYUGG_IioxHKkPpH2Ts-bVxMhd2oVyfLQ_x93CbaIeA5MLdMYszcuIKhlYdCO4k" alt="Hero Default"/>
         @endif
-        <div class="absolute inset-0 hero-gradient"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/30"></div>
     </div>
     <div class="relative z-10 max-w-container-max mx-auto px-4 md:px-margin-desktop w-full">
-        <div class="max-w-2xl">
-            <p class="text-primary font-label-md text-label-md tracking-widest uppercase mb-4 animate-pulse">Warisan Budaya Jawi</p>
-            <h1 class="font-display-lg text-4xl md:text-display-lg text-glow leading-tight mb-8">Melestarikan Budaya, <br/><span class="text-primary">Menginspirasi</span> Generasi</h1>
-            <p class="font-body-lg text-body-lg text-on-surface-variant mb-12 max-w-xl">
+        <div class="max-w-2xl bg-black/65 backdrop-blur-md border-2 border-[#f2ca50]/50 p-8 md:p-12 rounded-3xl shadow-2xl">
+            <p class="text-[#f2ca50] font-label-md text-label-md tracking-widest uppercase mb-4 animate-pulse font-bold">Warisan Budaya Jawi</p>
+            <h1 class="font-display-lg text-4xl md:text-5xl text-white font-black leading-tight mb-6 drop-shadow-md">Melestarikan Budaya, <br/><span class="text-[#f2ca50]">Menginspirasi</span> Generasi</h1>
+            <p class="font-body-lg text-body-lg text-slate-200 mb-8 max-w-xl leading-relaxed">
                 Gubug Seni Begog Kiyatdiharjan hadir sebagai episentrum pelestarian seni tari dan karawitan di lereng Candi Mlese, menjaga nyala api tradisi tetap berkobar bagi masa depan.
             </p>
             <div class="flex flex-wrap gap-4 md:gap-6">
-                <a href="{{ route('schedule.index') }}" class="bg-primary text-on-primary px-8 md:px-10 py-4 font-label-md text-label-md rounded-lg hover:brightness-110 transition-all inline-block">Jelajahi Program</a>
-                <a href="#sejarah" class="border border-primary text-primary px-8 md:px-10 py-4 font-label-md text-label-md rounded-lg hover:bg-primary/10 transition-all inline-block">Tentang Kami</a>
+                <a href="{{ route('schedule.index') }}" class="bg-[#f2ca50] text-[#3c2f00] px-8 md:px-10 py-4 font-bold rounded-xl hover:brightness-110 shadow-lg transition-all inline-block">Jelajahi Program</a>
+                <a href="#sejarah" class="border-2 border-[#f2ca50] text-[#f2ca50] hover:bg-[#f2ca50]/20 px-8 md:px-10 py-4 font-bold rounded-xl transition-all inline-block">Tentang Kami</a>
             </div>
         </div>
     </div>
