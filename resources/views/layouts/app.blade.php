@@ -242,7 +242,7 @@
                     © 2026 Gubug Seni Begog Kiyatdiharjan. Preserving Javanese Heritage.
                 </p>
                 <p class="font-label-md text-label-md text-on-surface-variant">
-                    Developed with <span class="text-red-500">♥</span> by <span class="text-primary font-bold">Alfagebra</span>
+                    Developed with <span class="text-red-500">♥</span> by <span class="text-primary font-bold">KKN.UPNYK.84.309</span>
                 </p>
             </div>
         </div>

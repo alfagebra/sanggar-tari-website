@@ -37,9 +37,9 @@
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
             </div>
             <!-- Float Decoration -->
-            <div class="absolute -bottom-8 -right-8 bg-primary-container p-8 rounded-lg border border-primary/20 hidden lg:block">
-                <p class="font-headline-md text-headline-md text-on-primary-container mb-1">1998</p>
-                <p class="font-label-md text-label-md text-on-primary-container/80 uppercase">Tahun Berdiri</p>
+            <div class="absolute -bottom-8 -right-8 bg-primary text-on-primary p-6 md:p-8 rounded-xl border-2 border-primary-container shadow-2xl hidden lg:block">
+                <p class="font-headline-md text-3xl md:text-4xl font-black mb-1">1998</p>
+                <p class="font-label-md text-xs font-black uppercase tracking-widest opacity-90">Tahun Berdiri</p>
             </div>
         </div>
         <div class="md:col-span-7">
