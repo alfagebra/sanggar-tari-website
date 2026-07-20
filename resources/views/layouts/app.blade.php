@@ -149,13 +149,11 @@
             </div>
 
             <!-- Trailing Actions -->
-            <div class="flex items-center gap-4 md:gap-6">
-                @auth
+            @auth
+                <div class="flex items-center gap-4 md:gap-6">
                     <a href="{{ route('admin.dashboard') }}" class="bg-primary text-on-primary px-6 py-2 font-label-md text-label-md rounded-lg hover:scale-105 transition-all duration-200">Admin</a>
-                @else
-                    <a href="{{ route('login') }}" class="bg-primary text-on-primary px-6 py-2 font-label-md text-label-md rounded-lg hover:scale-105 transition-all duration-200">Masuk</a>
-                @endauth
-            </div>
+                </div>
+            @endauth
         </nav>
     </header>
 
