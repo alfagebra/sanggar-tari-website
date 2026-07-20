@@ -11,8 +11,13 @@
     "CACHE_STORE": "database",
     "SESSION_DRIVER": "cookie",
     "LOG_CHANNEL": "stderr",
-    "AWS_URL": "https://dxzcskcdtoaauabfoyfx.storage.supabase.co/storage/v1/object/public/sanggar",
-    "AWS_DEFAULT_REGION": "ap-northeast-2"
+    "AWS_ACCESS_KEY_ID": "837789a5de39a542c439f4dc4110d69d",
+    "AWS_SECRET_ACCESS_KEY": "2303e3cce68d11ee3d746c5c709c3b3471bceaff7d8761ed2aa5b67724e64374",
+    "AWS_DEFAULT_REGION": "ap-northeast-2",
+    "AWS_BUCKET": "sanggar",
+    "AWS_ENDPOINT": "https://dxzcskcdtoaauabfoyfx.storage.supabase.co/storage/v1/s3",
+    "AWS_USE_PATH_STYLE_ENDPOINT": "true",
+    "AWS_URL": "https://dxzcskcdtoaauabfoyfx.storage.supabase.co/storage/v1/object/public/sanggar"
   },
   "functions": {
     "api/*.php": {
