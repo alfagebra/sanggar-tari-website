@@ -249,22 +249,19 @@
                 <div>
                     <h5 class="font-label-md text-label-md text-on-surface mb-6 uppercase tracking-widest">Informasi</h5>
                     <ul class="space-y-4 font-body-md text-body-md text-on-surface-variant">
-                        <li><a class="hover:text-primary transition-colors" href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $layoutProfile->phone ?? '081234567890') }}" target="_blank">Pendaftaran Siswa</a></li>
                         <li><a class="hover:text-primary transition-colors" href="{{ route('profile') }}">Syarat & Ketentuan</a></li>
                         <li><a class="hover:text-primary transition-colors" href="{{ route('profile') }}">Kebijakan Privasi</a></li>
                         <li><a class="hover:text-primary transition-colors" href="{{ route('home') }}">Peta Situs</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="flex flex-col md:flex-row justify-between items-center pt-10 border-t border-outline-variant/10 gap-6">
+            <div class="flex flex-col md:flex-row justify-between items-center pt-10 border-t border-outline-variant/10 gap-4 text-center md:text-left">
                 <p class="font-label-md text-label-md text-on-surface-variant">
-                    © 2024 Gubug Seni Begog Kiyatdiharjan. Preserving Javanese Heritage.
+                    © 2026 Gubug Seni Begog Kiyatdiharjan. Preserving Javanese Heritage.
                 </p>
-                <div class="flex gap-8">
-                    <a class="text-on-surface-variant hover:text-primary underline-offset-4 hover:underline transition-all opacity-80 hover:opacity-100 font-label-md text-label-md" href="{{ route('profile') }}">Kebijakan Privasi</a>
-                    <a class="text-on-surface-variant hover:text-primary underline-offset-4 hover:underline transition-all opacity-80 hover:opacity-100 font-label-md text-label-md" href="{{ route('profile') }}">Syarat & Ketentuan</a>
-                    <a class="text-on-surface-variant hover:text-primary underline-offset-4 hover:underline transition-all opacity-80 hover:opacity-100 font-label-md text-label-md" href="{{ route('home') }}">Peta Situs</a>
-                </div>
+                <p class="font-label-md text-label-md text-on-surface-variant">
+                    Developed with <span class="text-red-500">♥</span> by <span class="text-primary font-bold">Alfagebra</span>
+                </p>
             </div>
         </div>
     </footer>

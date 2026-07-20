@@ -26,11 +26,6 @@
             </div>
         </div>
     </div>
-    <!-- Decorative Scroll Indicator -->
-    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50">
-        <span class="text-label-md font-label-md text-primary vertical-rl">SCROLL</span>
-        <div class="w-px h-12 bg-primary/30"></div>
-    </div>
 </section>
 
 <!-- Sejarah Section -->
