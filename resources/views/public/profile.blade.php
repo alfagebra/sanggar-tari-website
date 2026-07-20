@@ -88,14 +88,14 @@
                         Hubungi WhatsApp
                     </a>
                     @php
-                        $instagramUrl = 'https://www.instagram.com/gsbkcandi/?utm_source=ig_web_button_share_sheet';
-                        if(!empty($profile->instagram) && Str::startsWith($profile->instagram, ['http://', 'https://'])) {
-                            $instagramUrl = $profile->instagram;
-                        }
+                        $igUser = ltrim($profile->instagram ?? 'gsbkcandi', '@');
+                        $igLink = Str::startsWith($igUser, ['http://', 'https://']) ? $igUser : 'https://www.instagram.com/' . $igUser;
                     @endphp
-                    <a href="{{ $instagramUrl }}" target="_blank" class="border border-primary text-primary px-8 py-3 rounded-lg font-bold text-sm hover:bg-primary/10 transition-all inline-flex items-center gap-2">
-                        Instagram: @gsbkcandi
-                    </a>
+                    @if(!empty($profile->instagram))
+                        <a href="{{ $igLink }}" target="_blank" class="border border-primary text-primary px-8 py-3 rounded-lg font-bold text-sm hover:bg-primary/10 transition-all inline-flex items-center gap-2">
+                            Instagram: @{{ Str::startsWith($igUser, ['http://', 'https://']) ? 'Sanggar' : $igUser }}
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>

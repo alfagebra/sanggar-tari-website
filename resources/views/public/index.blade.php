@@ -240,16 +240,20 @@
                             <p class="font-label-md text-label-md text-primary mb-1 uppercase tracking-wider">Media Sosial</p>
                             <div class="flex gap-4 mt-2">
                                 @php
-                                    $instagramUrl = 'https://www.instagram.com/gsbkcandi/?utm_source=ig_web_button_share_sheet';
-                                    if(!empty($profile->instagram) && Str::startsWith($profile->instagram, ['http://', 'https://'])) {
-                                        $instagramUrl = $profile->instagram;
-                                    }
+                                    $igUser = ltrim($profile->instagram ?? 'gsbkcandi', '@');
+                                    $igLink = Str::startsWith($igUser, ['http://', 'https://']) ? $igUser : 'https://www.instagram.com/' . $igUser;
+
+                                    $fbUser = ltrim($profile->facebook ?? 'gsbkcandi', '@');
+                                    $fbLink = Str::startsWith($fbUser, ['http://', 'https://']) ? $fbUser : 'https://www.facebook.com/' . $fbUser;
+
+                                    $ttUser = ltrim($profile->tiktok ?? 'gsbkcandi', '@');
+                                    $ttLink = Str::startsWith($ttUser, ['http://', 'https://']) ? $ttUser : 'https://www.tiktok.com/@' . $ttUser;
                                 @endphp
-                                <a class="text-on-surface-variant hover:text-primary transition-colors font-bold" href="{{ $instagramUrl }}" target="_blank">Instagram</a>
+                                <a class="text-on-surface-variant hover:text-primary transition-colors font-bold" href="{{ $igLink }}" target="_blank">Instagram</a>
                                 <span class="text-outline">/</span>
-                                <a class="text-on-surface-variant hover:text-primary transition-colors" href="https://facebook.com/{{ $profile->facebook ?? 'gsbkcandi' }}" target="_blank">Facebook</a>
+                                <a class="text-on-surface-variant hover:text-primary transition-colors" href="{{ $fbLink }}" target="_blank">Facebook</a>
                                 <span class="text-outline">/</span>
-                                <a class="text-on-surface-variant hover:text-primary transition-colors" href="https://tiktok.com/@{{ $profile->tiktok ?? 'gsbkcandi' }}" target="_blank">TikTok</a>
+                                <a class="text-on-surface-variant hover:text-primary transition-colors" href="{{ $ttLink }}" target="_blank">TikTok</a>
                             </div>
                         </div>
                     </div>
