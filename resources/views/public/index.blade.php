@@ -3,306 +3,299 @@
 @section('title', 'Beranda')
 
 @section('content')
-    <!-- Hero Slider Section (GSBK Candi Featured Style) -->
-    <section class="container hero-slider-section">
-        <div class="slideshow-container">
-            @if($galleries->isEmpty())
-                <!-- Fallback Slide 1 -->
-                <div class="slide-item active">
-                    <img src="{{ asset('images/hero-dance.jpg') }}" alt="Pentas Seni Tradisional">
-                    <div class="slide-caption">
-                        <span class="slide-tag">SINCE 1998 &bull; {{ __('SANGGAR SENI') }}</span>
-                        <h3>Penjaga Warisan <span class="text-gold">Seni Budaya</span></h3>
-                        <p>{{ __('Melestarikan dan mengenalkan ragam tari Jawa serta gamelan tradisional di kawasan bersejarah.') }}</p>
-                        <div class="slide-actions">
-                            <a href="{{ route('gallery.index') }}" class="btn btn-primary">{{ __('Jelajahi Galeri') }}</a>
-                            <a href="{{ route('schedule.index') }}" class="btn btn-outline-gold">{{ __('Lihat Jadwal') }}</a>
-                        </div>
-                    </div>
-                    <div class="slide-arrow" onclick="nextSlide()">&rarr;</div>
-                </div>
-            @else
-                @foreach($galleries->take(5) as $key => $gallery)
-                    <div class="slide-item {{ $key === 0 ? 'active' : '' }}">
-                        <img src="{{ Str::startsWith($gallery->image_url, ['http://', 'https://']) ? $gallery->image_url : Storage::url($gallery->image_url) }}" alt="{{ $gallery->title }}">
-                        <div class="slide-caption">
-                            <span class="slide-tag">SOROTAN KEGIATAN &bull; SANGGAR SENI</span>
-                            <h3>{{ $gallery->title }}</h3>
-                            <p>{{ $gallery->description ?? __('Wadah kreativitas seni dan pelestarian budaya luhur Nusantara.') }}</p>
-                            <div class="slide-actions">
-                                <a href="{{ route('gallery.index') }}" class="btn btn-primary">{{ __('Jelajahi Galeri') }}</a>
-                                <a href="{{ route('schedule.index') }}" class="btn btn-outline-gold">{{ __('Lihat Jadwal') }}</a>
-                            </div>
-                        </div>
-                        <div class="slide-arrow" onclick="nextSlide()">&rarr;</div>
-                    </div>
-                @endforeach
-            @endif
-        </div>
-
-        <!-- Slideshow controls -->
-        @if(!$galleries->isEmpty() && $galleries->take(5)->count() > 1)
-            <div class="slideshow-controls">
-                @foreach($galleries->take(5) as $key => $gallery)
-                    <span class="slide-dot {{ $key === 0 ? 'active' : '' }}" onclick="currentSlide({{ $key }})"></span>
-                @endforeach
-            </div>
+<!-- Hero Section -->
+<section class="relative h-screen flex items-center pt-20 overflow-hidden">
+    <div class="absolute inset-0 z-0">
+        @if(!$galleries->isEmpty() && $galleries->first()->image_url)
+            <img class="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-1000" src="{{ Str::startsWith($galleries->first()->image_url, ['http://', 'https://']) ? $galleries->first()->image_url : Storage::url($galleries->first()->image_url) }}" alt="Hero Background"/>
+        @else
+            <img class="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjwrYrlFEbog22tccAN7BuaR-Aa3OM7_DStrWexJyRjRvokmAA07bqNdVS-977-yjsuj00oUkDzjK1JbERGO4y0EXsPY9_SZJ-38KWUMZDB_u3TpayONXHBPU2xxFXaeCNvjefSGYL6N-_yLcpI0lsC3_CzcyPNX81H5Oc0_1NFyLHFKpJGKVv35ppr4eByRPEOK2rHCTdCUfm_RYUGG_IioxHKkPpH2Ts-bVxMhd2oVyfLQ_x93CbaIeA5MLdMYszcuIKhlYdCO4k" alt="Hero Default"/>
         @endif
-    </section>
-
-    <!-- Sejarah Kami Excerpt & Stats Section (GSBK Candi Style) -->
-    <section class="container home-section">
-        <div class="history-stats-grid">
-            <div class="history-excerpt-card">
-                <div>
-                    <span class="card-tag">{{ __('Asal Mula') }}</span>
-                    <h3>{{ __('Sejarah Kami') }}</h3>
-                    <p>{{ Str::limit($profile->history ?? 'Sanggar Seni didirikan sebagai ruang lestarinya seni tari dan gamelan tradisional Jawa, berdekatan dengan cagar budaya bersejarah.', 220) }}</p>
-                </div>
-                <div>
-                    <a href="{{ route('profile') }}" class="btn btn-outline-gold btn-sm">{{ __('Baca Selengkapnya') }} &rarr;</a>
-                </div>
-            </div>
-
-            <div class="stats-dual-grid">
-                <div class="stat-box-card">
-                    <h4>15+</h4>
-                    <p>{{ __('Seniman Aktif') }}</p>
-                </div>
-                <div class="stat-box-card">
-                    <h4>8</h4>
-                    <p>{{ __('Program Seni') }}</p>
-                </div>
+        <div class="absolute inset-0 hero-gradient"></div>
+    </div>
+    <div class="relative z-10 max-w-container-max mx-auto px-4 md:px-margin-desktop w-full">
+        <div class="max-w-2xl">
+            <p class="text-primary font-label-md text-label-md tracking-widest uppercase mb-4 animate-pulse">Warisan Budaya Jawi</p>
+            <h1 class="font-display-lg text-4xl md:text-display-lg text-glow leading-tight mb-8">Melestarikan Budaya, <br/><span class="text-primary">Menginspirasi</span> Generasi</h1>
+            <p class="font-body-lg text-body-lg text-on-surface-variant mb-12 max-w-xl">
+                Gubug Seni Begog Kiyatdiharjan hadir sebagai episentrum pelestarian seni tari dan karawitan di lereng Candi Mlese, menjaga nyala api tradisi tetap berkobar bagi masa depan.
+            </p>
+            <div class="flex flex-wrap gap-4 md:gap-6">
+                <a href="{{ route('schedule.index') }}" class="bg-primary text-on-primary px-8 md:px-10 py-4 font-label-md text-label-md rounded-lg hover:brightness-110 transition-all inline-block">Jelajahi Program</a>
+                <a href="#sejarah" class="border border-primary text-primary px-8 md:px-10 py-4 font-label-md text-label-md rounded-lg hover:bg-primary/10 transition-all inline-block">Tentang Kami</a>
             </div>
         </div>
-    </section>
+    </div>
+    <!-- Decorative Scroll Indicator -->
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50">
+        <span class="text-label-md font-label-md text-primary vertical-rl">SCROLL</span>
+        <div class="w-px h-12 bg-primary/30"></div>
+    </div>
+</section>
 
-    <!-- Schedule List Section (GSBK Candi Style) -->
-    <section class="container home-section">
-        <h2 class="home-section-title">{{ __('Jadwal') }} <span class="text-gold">{{ __('Latihan') }}</span></h2>
-        <p style="color: var(--text-muted); margin-top: -24px; margin-bottom: 30px;">{{ __('Terbuka untuk umum setiap akhir pekan.') }}</p>
-
-        @if(!isset($schedules) || $schedules->isEmpty())
-            <div class="schedule-list-wrapper">
-                <div class="schedule-item-card">
-                    <div class="schedule-left-info">
-                        <div class="schedule-date-badge">
-                            <span class="day-name">MING</span>
-                            <span class="time-val">15.00</span>
-                        </div>
-                        <div class="schedule-details">
-                            <h4>Latihan Karawitan & Tari</h4>
-                            <p>15.00 - 17.00 WIB &bull; Pelatih Sanggar</p>
-                        </div>
-                    </div>
-                    <a href="{{ route('schedule.index') }}" class="schedule-arrow">&rarr;</a>
-                </div>
+<!-- Sejarah Section -->
+<section class="py-32 bg-surface-dim" id="sejarah">
+    <div class="max-w-container-max mx-auto px-4 md:px-margin-desktop grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
+        <div class="md:col-span-5 relative">
+            <div class="aspect-[4/5] bg-surface-container-high rounded-xl border border-gold-subtle overflow-hidden relative">
+                <img class="w-full h-full object-cover opacity-80 hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrG6ejS-LVZC1DRCrR8gtm-qACIw_LMZmzzPwZ6lvGdJ-KXThlQL5at56nIapJh0BVawB95kSERC3nz0j6DFr_7hRF8cUPAkUFF-CtXdDYmpsl8rj4MDy2ksFoIgZFXW5s3VGLYm-MNOJy7gHsmeoyYV-t4fbyrlo9DhZiA_GljRBgv2lZVf5s47bBVUm2cCkb66nVb4jump83X--k-NwMEG3NTWbDH5W0hOmom5cA-CC__enIRfTX4xCFXRGRSRUHx9jHX1TVyY3G" alt="Penari Tradisional Jawa"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
             </div>
-        @else
-            <div class="schedule-list-wrapper">
-                @foreach($schedules->take(3) as $schedule)
-                    <div class="schedule-item-card">
-                        <div class="schedule-left-info">
-                            <div class="schedule-date-badge">
-                                <span class="day-name">{{ strtoupper(substr($schedule->day, 0, 3)) }}</span>
-                                <span class="time-val">{{ $schedule->time ? explode('-', $schedule->time)[0] : '15.00' }}</span>
+            <!-- Float Decoration -->
+            <div class="absolute -bottom-8 -right-8 bg-primary-container p-8 rounded-lg border border-primary/20 hidden lg:block">
+                <p class="font-headline-md text-headline-md text-on-primary-container mb-1">1998</p>
+                <p class="font-label-md text-label-md text-on-primary-container/80 uppercase">Tahun Berdiri</p>
+            </div>
+        </div>
+        <div class="md:col-span-7">
+            <h2 class="font-headline-lg text-3xl md:text-headline-lg mb-8">Pijak Kuat dalam <span class="text-primary italic">Tradisi</span></h2>
+            <div class="space-y-6">
+                <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                    {{ $profile->history ?? 'Gubug Seni Begog Kiyatdiharjan (GSBK) bukan sekadar sanggar seni, melainkan wujud pengabdian terhadap akar budaya Jawa yang luhur. Berawal dari kecintaan keluarga Kiyatdiharjan terhadap seni pertunjukan, kami bertransformasi menjadi pusat pembelajaran yang inklusif.' }}
+                </p>
+                <p class="font-body-md text-body-md text-on-surface-variant/80 italic border-l-4 border-primary pl-6 py-2">
+                    "Seni bukan sekadar tontonan, melainkan tuntunan hidup yang harus diwariskan dari satu tarikan napas ke tarikan napas berikutnya."
+                </p>
+                <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                    Berlokasi tepat di kawasan bersejarah Candi Mlese, GSBK mengintegrasikan atmosfer sakral peninggalan masa lampau dengan semangat inovasi kontemporer, memastikan setiap gerakan tari dan ketukan gamelan memiliki makna yang dalam.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Jadwal & Lokasi -->
+<section class="py-32 bg-background relative overflow-hidden" id="jadwal">
+    <div class="max-w-container-max mx-auto px-4 md:px-margin-desktop">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
+            <div>
+                <h2 class="font-headline-lg text-3xl md:text-headline-lg mb-4">Aktivitas & Kunjungan</h2>
+                <p class="font-body-lg text-body-lg text-on-surface-variant">Saksikan dan bergabunglah dalam perayaan rutin kami.</p>
+            </div>
+            <div class="bg-surface-container-high p-1 flex rounded-lg">
+                <button class="px-6 py-2 bg-primary text-on-primary font-label-md text-label-md rounded-md">Reguler</button>
+                <a href="{{ route('schedule.index') }}" class="px-6 py-2 text-on-surface-variant hover:text-primary font-label-md text-label-md rounded-md transition-colors">Semua Jadwal</a>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Activity List -->
+            <div class="lg:col-span-2 space-y-4">
+                @if(!isset($schedules) || $schedules->isEmpty())
+                    <div class="bg-surface-container-low border border-gold-subtle p-6 flex items-center gap-6 group hover:bg-surface-container-high transition-all duration-300 rounded-xl">
+                        <div class="flex-shrink-0 w-16 h-16 bg-primary/10 rounded-full flex flex-col items-center justify-center border border-primary/20">
+                            <span class="font-bold text-primary">24</span>
+                            <span class="text-[10px] uppercase text-primary/70">JUL</span>
+                        </div>
+                        <div class="flex-grow">
+                            <h3 class="font-headline-md text-xl md:text-headline-md mb-1 text-on-surface group-hover:text-primary transition-colors">Latihan Rutin Karawitan & Tari</h3>
+                            <p class="font-body-md text-body-md text-on-surface-variant">Setiap Rabu & Sabtu Malam • Sanggar GSBK</p>
+                        </div>
+                        <span class="material-symbols-outlined text-primary-fixed-dim">arrow_forward</span>
+                    </div>
+                @else
+                    @foreach($schedules->take(3) as $schedule)
+                        <div class="bg-surface-container-low border border-gold-subtle p-6 flex items-center gap-6 group hover:bg-surface-container-high transition-all duration-300 rounded-xl">
+                            <div class="flex-shrink-0 w-16 h-16 bg-primary/10 rounded-full flex flex-col items-center justify-center border border-primary/20">
+                                <span class="font-bold text-primary">{{ strtoupper(substr($schedule->day, 0, 3)) }}</span>
+                                <span class="text-[10px] uppercase text-primary/70">HARI</span>
                             </div>
-                            <div class="schedule-details">
-                                <h4>{{ $schedule->class_name }}</h4>
-                                <p>{{ $schedule->time }} &bull; {{ $schedule->instructor ?? 'Pelatih Sanggar' }}</p>
+                            <div class="flex-grow">
+                                <h3 class="font-headline-md text-xl md:text-headline-md mb-1 text-on-surface group-hover:text-primary transition-colors">{{ $schedule->class_name }}</h3>
+                                <p class="font-body-md text-body-md text-on-surface-variant">{{ $schedule->time }} • Pelatih: {{ $schedule->instructor ?? 'GSBK' }}</p>
                             </div>
+                            <a href="{{ route('schedule.index') }}" class="material-symbols-outlined text-primary-fixed-dim">arrow_forward</a>
                         </div>
-                        <a href="{{ route('schedule.index') }}" class="schedule-arrow">&rarr;</a>
-                    </div>
-                @endforeach
-            </div>
-        @endif
-    </section>
-
-    <!-- Recent Articles Grid Section (GSBK Candi Style) -->
-    <section class="container home-section">
-        <h2 class="home-section-title">{{ __('Artikel') }} <span class="text-gold">{{ __('Terkini') }}</span></h2>
-        
-        @if($articles->isEmpty())
-            <div style="padding: 40px; text-align: center; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--dark-card); color: var(--text-muted);">
-                {{ __('Belum ada artikel atau kabar seni yang diterbitkan saat ini.') }}
-            </div>
-        @else
-            <div class="three-column-grid">
-                @foreach($articles->take(3) as $article)
-                    <article class="blog-card">
-                        @if($article->image_url)
-                            <div class="blog-card-img-wrapper">
-                                <a href="{{ $article->source_url ?? route('articles.show', $article->slug) }}" target="{{ $article->source_url ? '_blank' : '_self' }}">
-                                    <img src="{{ Str::startsWith($article->image_url, ['http://', 'https://']) ? $article->image_url : Storage::url($article->image_url) }}" alt="{{ $article->title }}">
-                                </a>
-                            </div>
-                        @endif
-                        <span class="blog-card-tag">{{ __('SENI & BUDAYA') }}</span>
-                        <h3 class="blog-card-title">
-                            <a href="{{ $article->source_url ?? route('articles.show', $article->slug) }}" target="{{ $article->source_url ? '_blank' : '_self' }}">
-                                {{ $article->title }}
-                            </a>
-                        </h3>
-                        <p class="blog-card-desc">{{ Str::limit(strip_tags($article->content), 120) }}</p>
-                        
-                        <div class="blog-card-meta">
-                            <span>{{ $article->created_at->format('d M Y') }}</span>
-                        </div>
-                    </article>
-                @endforeach
+                    @endforeach
+                @endif
             </div>
 
-            <div style="text-align: center; margin-top: 36px;">
-                <a href="{{ route('articles.index') }}" class="btn btn-dark-pill">{{ __('Lihat Semua Artikel') }}</a>
-            </div>
-        @endif
-    </section>
-
-    <!-- Recent Gallery Photos Grid Section -->
-    <section class="container home-section">
-        <h2 class="home-section-title">{{ __('Galeri') }} <span class="text-gold">{{ __('Visual') }}</span></h2>
-
-        @if($galleries->isEmpty())
-            <div style="padding: 40px; text-align: center; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--dark-card); color: var(--text-muted);">
-                {{ __('Belum ada dokumentasi foto yang diunggah.') }}
-            </div>
-        @else
-            <div class="gallery-grid">
-                @foreach($galleries->take(4) as $gallery)
-                    <div class="gallery-item">
-                        <img src="{{ Str::startsWith($gallery->image_url, ['http://', 'https://']) ? $gallery->image_url : Storage::url($gallery->image_url) }}" alt="{{ $gallery->title }}">
-                        <div class="gallery-overlay">
-                            <h4>{{ $gallery->title }}</h4>
-                            <p>{{ $gallery->description ?? __('Dokumentasi Sanggar Tari') }}</p>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-
-            <div style="text-align: center; margin-top: 36px;">
-                <a href="{{ route('gallery.index') }}" class="btn btn-dark-pill">{{ __('Lihat Semua Galeri') }}</a>
-            </div>
-        @endif
-    </section>
-
-    <!-- Google Maps & Contact Info Divided Section (GSBK Style) -->
-    <section class="container home-section">
-        <h2 class="home-section-title">{{ __('Hubungi') }} <span class="text-gold">{{ __('Kami') }}</span></h2>
-        <p style="color: var(--text-muted); margin-top: -24px; margin-bottom: 30px;">{{ __('Mari berkolaborasi atau menanyakan informasi tanpa ragu mengenai program kami.') }}</p>
-        
-        <div class="location-contact-grid">
-            <!-- Left Column: Google Maps -->
-            <div class="map-container-wrapper">
-                <div class="map-container">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.973461245464!2d110.370529!3d-7.792613!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357e2f073e50269f%3A0x959779df52c8b82e!2sYogyakarta%2C%20Kota%20Yogyakarta%2C%20Daerah%20Istimewa%20Yogyakarta!5e0!3m2!1sid!2sid!4v1625000000000!5m2!1sid!2sid" 
-                        allowfullscreen="" 
-                        loading="lazy">
-                    </iframe>
+            <!-- Location Map Marker Stylized -->
+            <div class="bg-surface-container-high rounded-xl overflow-hidden border border-gold-subtle relative h-[400px] lg:h-auto" id="lokasi">
+                <div class="absolute inset-0 opacity-40 grayscale contrast-125">
+                    <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-HNQ7tiGpQ1qdd4tDq9Wk529yVoHsNvx_0z2VR5i8Q4wLr6vt5F79mXecDwFw24G3cyHDuW4dj6BxYvHosbYWNPZU15kwDp14GBvqr9mlm5pQw_rNaPuPmln6crASUfYcQmjNtDxZi1ToO65VeMEkOIvWUmaTm4fDpjyVstklZdyDQbvlBVjp6rVhhlOeiIrT6FEoZXPaVIv3Gs1NVlSsetHT_s0ZpNDCT6LhntMBiVp6WJ23ux2pAmGO0yM-XAXwiayX5XWMeA45" alt="Lokasi Sanggar"/>
                 </div>
-            </div>
-
-            <!-- Right Column: Contact Details Card & Social Links -->
-            <div class="contact-info-card">
-                <h3>{{ __('Lokasi & Kontak') }}</h3>
-                <p class="contact-tagline">{{ __('Silakan hubungi kami untuk pendaftaran, kolaborasi pentas, atau informasi lebih lanjut.') }}</p>
-                
-                <div class="contact-details-list">
-                    <div class="contact-detail-item">
-                        <div class="contact-detail-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                        </div>
-                        <div class="contact-detail-text">
-                            <strong>{{ __('Alamat Sanggar') }}</strong>
-                            <span>{{ $profile->address ?? 'Jl. Kebudayaan No. 45, Yogyakarta, Indonesia' }}</span>
-                        </div>
+                <div class="relative z-10 p-8 h-full flex flex-col justify-end bg-gradient-to-t from-background to-transparent">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="material-symbols-outlined text-primary text-3xl">location_on</span>
+                        <h3 class="font-headline-md text-headline-md">Candi Mlese</h3>
                     </div>
-                    
-                    <div class="contact-detail-item">
-                        <div class="contact-detail-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                        </div>
-                        <div class="contact-detail-text">
-                            <strong>{{ __('Telepon / WhatsApp') }}</strong>
-                            <span>{{ $profile->phone ?? '+62 812-3456-7890' }}</span>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-detail-item">
-                        <div class="contact-detail-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                        </div>
-                        <div class="contact-detail-text">
-                            <strong>{{ __('Email Resmi') }}</strong>
-                            <span>{{ $profile->email ?? 'info@sanggartari.com' }}</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="contact-social-links">
-                    <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $profile->phone ?? '081234567890') }}" target="_blank" class="btn btn-whatsapp btn-sm" style="flex-grow: 1;">
-                        WhatsApp
+                    <p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                        {{ $profile->address ?? 'Gantiwarno, Klaten, Jawa Tengah.' }}<br/>Akses mudah dari Solo dan Yogyakarta.
+                    </p>
+                    <a class="inline-flex items-center gap-2 text-primary font-label-md text-label-md hover:underline decoration-2 underline-offset-8" href="https://maps.google.com/?q={{ urlencode($profile->address ?? 'Candi Mlese Klaten') }}" target="_blank">
+                        Buka Google Maps <span class="material-symbols-outlined">open_in_new</span>
                     </a>
-                    @if($profile && $profile->instagram)
-                        <a href="https://instagram.com/{{ $profile->instagram }}" target="_blank" class="btn btn-outline-gold btn-sm" style="flex-grow: 1;">
-                            Instagram
-                        </a>
-                    @endif
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Call To Action Banner Section -->
-    <section class="container">
-        <div class="cta-banner">
-            <h2>{{ __('Mari Bergabung Bersama Kami') }}</h2>
-            <p>{{ __('Pelajari keindahan seni tari tradisional Nusantara secara menyenangkan bersama instruktur berpengalaman di sanggar kami.') }}</p>
-            <div class="cta-actions">
-                <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $profile->phone ?? '081234567890') }}" target="_blank" class="btn btn-whatsapp">
-                    {{ __('Hubungi WhatsApp') }}
-                </a>
-                <a href="{{ route('schedule.index') }}" class="btn btn-outline-gold">
-                    {{ __('Lihat Jadwal Kelas') }}
-                </a>
+<!-- Artikel & Galeri (Bento Grid Style) -->
+<section class="py-32 bg-surface-dim" id="artikel">
+    <div class="max-w-container-max mx-auto px-4 md:px-margin-desktop">
+        <div class="flex justify-between items-end mb-16">
+            <div>
+                <h2 class="font-headline-lg text-3xl md:text-headline-lg mb-4">Jendela Budaya</h2>
+                <p class="font-body-lg text-body-lg text-on-surface-variant">Kisah dari balik panggung dan kilasan momen terbaik.</p>
+            </div>
+            <a class="font-label-md text-label-md text-primary hover:text-primary-fixed-dim transition-colors flex items-center gap-2" href="{{ route('gallery.index') }}">Lihat Semua <span class="material-symbols-outlined">grid_view</span></a>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-4 grid-rows-none md:grid-rows-2 gap-6 h-auto md:h-[700px]">
+            <!-- Main Featured Article -->
+            @php $mainArticle = $articles->first(); @endphp
+            <div class="md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-xl border border-gold-subtle min-h-[350px]">
+                @if($mainArticle && $mainArticle->image_url)
+                    <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" src="{{ Str::startsWith($mainArticle->image_url, ['http://', 'https://']) ? $mainArticle->image_url : Storage::url($mainArticle->image_url) }}" alt="{{ $mainArticle->title }}"/>
+                @else
+                    <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuVXmJ1WPTHLimJrAYdisvhYCpQQ6sGZYnPxoFRNcYt2lqSSHH7Ucm_gA58-wKta5v-DDPYbRi0Gj2xqLcjb5rv7V3kSBDg9oG0MFhj-2nuS4ZEPKFvAE1aoOI95joTp6n-NIb4-XPOWe_c0GhtcB8qsut0RHTfOEFmxFpA5O6tGyeKLnQG8aECXT9lDipgRym7-tzzNj244C4XJ2QWoAMzTrvbmr-sSTXJK8ejx7_BTQBcXbu4KSYL_t0UeyFVbfrRGxml1fzjTEC" alt="Filosofi Gerak"/>
+                @endif
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+                <div class="absolute bottom-0 p-6 md:p-10">
+                    <span class="inline-block bg-primary text-on-primary px-3 py-1 text-[10px] font-bold tracking-widest uppercase mb-4">FEATURED ARTICLE</span>
+                    <h3 class="font-headline-lg text-2xl md:text-headline-lg mb-4 text-glow">
+                        {{ $mainArticle->title ?? 'Filosofi Gerak dalam Tari Gambyong' }}
+                    </h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-6">
+                        {{ $mainArticle ? Str::limit(strip_tags($mainArticle->content), 120) : 'Mengenal lebih dalam makna setiap jengkal gerakan yang menyimbolkan keanggunan dan kesuburan perempuan Jawa.' }}
+                    </p>
+                    <a href="{{ $mainArticle ? route('articles.show', $mainArticle->slug) : route('articles.index') }}" class="font-label-md text-label-md text-primary flex items-center gap-2 group-hover:gap-4 transition-all">Baca Selengkapnya <span class="material-symbols-outlined">trending_flat</span></a>
+                </div>
+            </div>
+
+            <!-- Gallery Item 1 -->
+            @php $gal1 = $galleries->skip(1)->first(); @endphp
+            <div class="md:col-span-1 relative group overflow-hidden rounded-xl border border-gold-subtle h-[200px] md:h-auto" id="galeri">
+                @if($gal1 && $gal1->image_url)
+                    <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="{{ Str::startsWith($gal1->image_url, ['http://', 'https://']) ? $gal1->image_url : Storage::url($gal1->image_url) }}" alt="{{ $gal1->title }}"/>
+                @else
+                    <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBkBc0VwH5wSjIzcx8c05mlHPLDAmFBXsnVYw3fWuKp4O6Qet1B1LACb6uxmcyg_PmuQsjsI9LiTRyNagktYViWzSglXGLSSFpU9wYdl4qOvt4ThZPZ72aXtDMA5ZrvedaaxPDevI-JBzGNevdWbxQV8xgvLXWD5wdD2lFxqVARW8Mf-3pAz7kaHgyxUMPjqrWAHreLTE5uT4gdtqDYnzyXXT7q7dLewbyyWBI3UEQL39mwM7idJJvqUYvmkfHm9jed-q7KomGKO3-" alt="Gamelan"/>
+                @endif
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <a href="{{ route('gallery.index') }}" class="material-symbols-outlined text-white text-4xl">fullscreen</a>
+                </div>
+            </div>
+
+            <!-- Gallery Item 2 -->
+            @php $gal2 = $galleries->skip(2)->first(); @endphp
+            <div class="md:col-span-1 relative group overflow-hidden rounded-xl border border-gold-subtle h-[200px] md:h-auto">
+                @if($gal2 && $gal2->image_url)
+                    <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="{{ Str::startsWith($gal2->image_url, ['http://', 'https://']) ? $gal2->image_url : Storage::url($gal2->image_url) }}" alt="{{ $gal2->title }}"/>
+                @else
+                    <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9bI42XoWlayh7kEKBq51M5DfgAaF-Uf-cgM-_VFKI6o4pO4CGdg2i5YzEi-CNHvKc4cpJrIwQJhanZP_zil7uKxnKmaHVqV0YGval1794h1ctM2_WKBFyM_FogTMIDcc_TFzDA6wHjcgNLeQFxNyJcfGI1I8mpLBj_HJKGQc_EIYozzAl9_JzOEKfzhJ7Pnud4Xud2jZWabsO_aqCjUDT3CVFloruMWKXuMLonpss7mxn9ESdNH-YU-TeZOFuYsk-EJUXBpiQQMsS" alt="Sanggar"/>
+                @endif
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <a href="{{ route('gallery.index') }}" class="material-symbols-outlined text-white text-4xl">fullscreen</a>
+                </div>
+            </div>
+
+            <!-- Small Article -->
+            @php $secondArticle = $articles->skip(1)->first(); @endphp
+            <div class="md:col-span-2 bg-surface-container p-6 md:p-8 rounded-xl border border-gold-subtle flex flex-col justify-between hover:bg-surface-container-high transition-colors">
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-primary font-label-md text-label-md">BERITA TERBARU</span>
+                        <span class="text-on-surface-variant font-label-md text-[12px]">{{ $secondArticle ? $secondArticle->created_at->format('d M Y') : '12 Juli 2024' }}</span>
+                    </div>
+                    <h4 class="font-headline-md text-xl md:text-headline-md mb-3">
+                        {{ $secondArticle->title ?? 'GSBK Candi Meraih Penghargaan Anugerah Kebudayaan 2024' }}
+                    </h4>
+                    <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">
+                        {{ $secondArticle ? Str::limit(strip_tags($secondArticle->content), 120) : 'Apresiasi tinggi bagi komunitas atas dedikasi tanpa henti dalam menjaga kelestarian seni karawitan di wilayah Klaten.' }}
+                    </p>
+                </div>
+                <a class="mt-6 font-label-md text-label-md text-primary flex items-center gap-2" href="{{ $secondArticle ? route('articles.show', $secondArticle->slug) : route('articles.index') }}">Baca Artikel <span class="material-symbols-outlined">chevron_right</span></a>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Slideshow Auto-play Javascript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            let currentSlideIndex = 0;
-            const slides = document.querySelectorAll('.slide-item');
-            const dots = document.querySelectorAll('.slide-dot');
-            const slideCount = slides.length;
+<!-- Kontak Section -->
+<section class="py-32 bg-background" id="kontak">
+    <div class="max-w-container-max mx-auto px-4 md:px-margin-desktop">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20">
+            <div>
+                <h2 class="font-headline-lg text-3xl md:text-headline-lg mb-8">Terhubung Bersama Kami</h2>
+                <p class="font-body-lg text-body-lg text-on-surface-variant mb-12">Ingin bergabung, berkolaborasi, atau sekadar berkunjung? Sapa kami melalui form atau detail kontak di bawah ini.</p>
+                <div class="space-y-8">
+                    <div class="flex items-start gap-6">
+                        <div class="w-12 h-12 rounded-full border border-primary flex items-center justify-center flex-shrink-0">
+                            <span class="material-symbols-outlined text-primary">mail</span>
+                        </div>
+                        <div>
+                            <p class="font-label-md text-label-md text-primary mb-1 uppercase tracking-wider">Email</p>
+                            <p class="font-body-lg text-body-lg">{{ $profile->email ?? 'halo@gsbkcandi.art' }}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-6">
+                        <div class="w-12 h-12 rounded-full border border-primary flex items-center justify-center flex-shrink-0">
+                            <span class="material-symbols-outlined text-primary">phone</span>
+                        </div>
+                        <div>
+                            <p class="font-label-md text-label-md text-primary mb-1 uppercase tracking-wider">Telepon / WA</p>
+                            <p class="font-body-lg text-body-lg">{{ $profile->phone ?? '+62 812-3456-7890' }}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-6">
+                        <div class="w-12 h-12 rounded-full border border-primary flex items-center justify-center flex-shrink-0">
+                            <span class="material-symbols-outlined text-primary">share</span>
+                        </div>
+                        <div>
+                            <p class="font-label-md text-label-md text-primary mb-1 uppercase tracking-wider">Media Sosial</p>
+                            <div class="flex gap-4 mt-2">
+                                <a class="text-on-surface-variant hover:text-primary transition-colors" href="https://instagram.com/{{ $profile->instagram ?? 'gsbkcandi' }}" target="_blank">Instagram</a>
+                                <span class="text-outline">/</span>
+                                <a class="text-on-surface-variant hover:text-primary transition-colors" href="https://facebook.com/{{ $profile->facebook ?? 'gsbkcandi' }}" target="_blank">Facebook</a>
+                                <span class="text-outline">/</span>
+                                <a class="text-on-surface-variant hover:text-primary transition-colors" href="https://tiktok.com/@{{ $profile->tiktok ?? 'gsbkcandi' }}" target="_blank">TikTok</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-surface-container-low p-8 md:p-10 rounded-xl border border-gold-subtle shadow-2xl">
+                <form class="space-y-8" action="https://wa.me/{{ preg_replace('/[^0-9]/', '', $profile->phone ?? '081234567890') }}" method="GET" target="_blank">
+                    <div class="group">
+                        <label class="block font-label-md text-label-md text-on-surface-variant mb-2 group-focus-within:text-primary transition-colors">Nama Lengkap</label>
+                        <input class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-primary px-0 py-3 text-body-md transition-all text-white outline-none" placeholder="Tuliskan nama Anda..." type="text" name="name" required/>
+                    </div>
+                    <div class="group">
+                        <label class="block font-label-md text-label-md text-on-surface-variant mb-2 group-focus-within:text-primary transition-colors">Email Aktif</label>
+                        <input class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-primary px-0 py-3 text-body-md transition-all text-white outline-none" placeholder="alamat@email.com" type="email" name="email"/>
+                    </div>
+                    <div class="group">
+                        <label class="block font-label-md text-label-md text-on-surface-variant mb-2 group-focus-within:text-primary transition-colors">Pesan</label>
+                        <textarea class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-primary px-0 py-3 text-body-md transition-all resize-none text-white outline-none" placeholder="Apa yang ingin Anda sampaikan?" rows="4" name="text" required></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-primary text-on-primary py-5 font-label-md text-label-md rounded-lg hover:brightness-110 transition-all flex justify-center items-center gap-3">
+                        Kirim Pesan <span class="material-symbols-outlined">send</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 
-            if (slideCount <= 1) return;
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const observerOptions = {
+            threshold: 0.1
+        };
 
-            function showSlide(index) {
-                slides.forEach((slide) => slide.classList.remove('active'));
-                dots.forEach((dot) => dot.classList.remove('active'));
-                
-                slides[index].classList.add('active');
-                if (dots[index]) {
-                    dots[index].classList.add('active');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
                 }
-                currentSlideIndex = index;
-            }
+            });
+        }, observerOptions);
 
-            window.nextSlide = function() {
-                let nextIndex = (currentSlideIndex + 1) % slideCount;
-                showSlide(nextIndex);
-            }
-
-            let slideInterval = setInterval(nextSlide, 5000);
-
-            window.currentSlide = function(index) {
-                clearInterval(slideInterval);
-                showSlide(index);
-                slideInterval = setInterval(nextSlide, 5000);
-            };
+        document.querySelectorAll('section > div').forEach(el => {
+            el.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
+            observer.observe(el);
         });
-    </script>
+    });
+</script>
 @endsection
