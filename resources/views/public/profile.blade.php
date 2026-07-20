@@ -89,10 +89,8 @@
                     </a>
                     @php
                         $instagramUrl = 'https://www.instagram.com/gsbkcandi/?utm_source=ig_web_button_share_sheet';
-                        if(!empty($profile->instagram)) {
-                            $instagramUrl = Str::startsWith($profile->instagram, ['http://', 'https://']) 
-                                ? $profile->instagram 
-                                : 'https://www.instagram.com/' . ltrim($profile->instagram, '@');
+                        if(!empty($profile->instagram) && Str::startsWith($profile->instagram, ['http://', 'https://'])) {
+                            $instagramUrl = $profile->instagram;
                         }
                     @endphp
                     <a href="{{ $instagramUrl }}" target="_blank" class="border border-primary text-primary px-8 py-3 rounded-lg font-bold text-sm hover:bg-primary/10 transition-all inline-flex items-center gap-2">

@@ -241,10 +241,8 @@
                             <div class="flex gap-4 mt-2">
                                 @php
                                     $instagramUrl = 'https://www.instagram.com/gsbkcandi/?utm_source=ig_web_button_share_sheet';
-                                    if(!empty($profile->instagram)) {
-                                        $instagramUrl = Str::startsWith($profile->instagram, ['http://', 'https://']) 
-                                            ? $profile->instagram 
-                                            : 'https://www.instagram.com/' . ltrim($profile->instagram, '@');
+                                    if(!empty($profile->instagram) && Str::startsWith($profile->instagram, ['http://', 'https://'])) {
+                                        $instagramUrl = $profile->instagram;
                                     }
                                 @endphp
                                 <a class="text-on-surface-variant hover:text-primary transition-colors font-bold" href="{{ $instagramUrl }}" target="_blank">Instagram</a>
