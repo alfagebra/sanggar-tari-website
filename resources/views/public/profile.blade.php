@@ -87,11 +87,17 @@
                     <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $profile->phone ?? '081234567890') }}" target="_blank" class="bg-emerald-600 text-white px-8 py-3 rounded-lg font-bold text-sm hover:bg-emerald-500 transition-all inline-flex items-center gap-2">
                         Hubungi WhatsApp
                     </a>
-                    @if($profile && $profile->instagram)
-                        <a href="https://instagram.com/{{ $profile->instagram }}" target="_blank" class="border border-primary text-primary px-8 py-3 rounded-lg font-bold text-sm hover:bg-primary/10 transition-all inline-flex items-center gap-2">
-                            Instagram: @{{ $profile->instagram }}
-                        </a>
-                    @endif
+                    @php
+                        $instagramUrl = 'https://www.instagram.com/gsbkcandi/?utm_source=ig_web_button_share_sheet';
+                        if(!empty($profile->instagram)) {
+                            $instagramUrl = Str::startsWith($profile->instagram, ['http://', 'https://']) 
+                                ? $profile->instagram 
+                                : 'https://www.instagram.com/' . ltrim($profile->instagram, '@');
+                        }
+                    @endphp
+                    <a href="{{ $instagramUrl }}" target="_blank" class="border border-primary text-primary px-8 py-3 rounded-lg font-bold text-sm hover:bg-primary/10 transition-all inline-flex items-center gap-2">
+                        Instagram: @gsbkcandi
+                    </a>
                 </div>
             </div>
         </div>

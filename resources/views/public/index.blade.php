@@ -239,7 +239,15 @@
                         <div>
                             <p class="font-label-md text-label-md text-primary mb-1 uppercase tracking-wider">Media Sosial</p>
                             <div class="flex gap-4 mt-2">
-                                <a class="text-on-surface-variant hover:text-primary transition-colors" href="https://instagram.com/{{ $profile->instagram ?? 'gsbkcandi' }}" target="_blank">Instagram</a>
+                                @php
+                                    $instagramUrl = 'https://www.instagram.com/gsbkcandi/?utm_source=ig_web_button_share_sheet';
+                                    if(!empty($profile->instagram)) {
+                                        $instagramUrl = Str::startsWith($profile->instagram, ['http://', 'https://']) 
+                                            ? $profile->instagram 
+                                            : 'https://www.instagram.com/' . ltrim($profile->instagram, '@');
+                                    }
+                                @endphp
+                                <a class="text-on-surface-variant hover:text-primary transition-colors font-bold" href="{{ $instagramUrl }}" target="_blank">Instagram</a>
                                 <span class="text-outline">/</span>
                                 <a class="text-on-surface-variant hover:text-primary transition-colors" href="https://facebook.com/{{ $profile->facebook ?? 'gsbkcandi' }}" target="_blank">Facebook</a>
                                 <span class="text-outline">/</span>
