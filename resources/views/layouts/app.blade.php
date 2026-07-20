@@ -148,14 +148,80 @@
                 <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="{{ route('home') }}#kontak">Kontak</a>
             </div>
 
-            <!-- Trailing Actions -->
-            @auth
-                <div class="flex items-center gap-4 md:gap-6">
-                    <a href="{{ route('admin.dashboard') }}" class="bg-primary text-on-primary px-6 py-2 font-label-md text-label-md rounded-lg hover:scale-105 transition-all duration-200">Admin</a>
-                </div>
-            @endauth
+            <!-- Trailing Actions & Hamburger Button -->
+            <div class="flex items-center gap-4">
+                @auth
+                    <a href="{{ route('admin.dashboard') }}" class="hidden md:inline-block bg-primary text-on-primary px-6 py-2 font-label-md text-label-md rounded-lg hover:scale-105 transition-all duration-200">Admin</a>
+                @endauth
+                
+                <!-- Mobile Hamburger Button -->
+                <button id="mobile-menu-btn" type="button" class="md:hidden flex items-center justify-center p-2 text-primary hover:text-primary-fixed-dim transition-colors focus:outline-none" aria-label="Toggle Navigation">
+                    <span class="material-symbols-outlined text-3xl">menu</span>
+                </button>
+            </div>
         </nav>
     </header>
+
+    <!-- Mobile Navigation Drawer Overlay -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300"></div>
+
+    <!-- Mobile Navigation Drawer -->
+    <aside id="mobile-menu-drawer" class="fixed top-0 right-0 w-72 h-full bg-surface-container-low border-l border-gold-subtle z-50 p-6 flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-in-out">
+        <div>
+            <!-- Header with Close Button -->
+            <div class="flex justify-between items-center pb-6 border-b border-outline-variant/20 mb-8">
+                <a class="font-headline-md text-xl font-bold text-primary tracking-tight" href="{{ route('home') }}">GSBK Candi</a>
+                <button id="mobile-menu-close" type="button" class="text-on-surface-variant hover:text-primary transition-colors p-1 focus:outline-none">
+                    <span class="material-symbols-outlined text-2xl">close</span>
+                </button>
+            </div>
+
+            <!-- Mobile Nav Links -->
+            <nav class="flex flex-col space-y-4">
+                <a class="font-label-md text-body-lg text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-outline-variant/10" href="{{ route('home') }}#sejarah" onclick="closeMobileMenu()">Sejarah</a>
+                <a class="font-label-md text-body-lg text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-outline-variant/10" href="{{ route('articles.index') }}" onclick="closeMobileMenu()">Artikel</a>
+                <a class="font-label-md text-body-lg text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-outline-variant/10" href="{{ route('gallery.index') }}" onclick="closeMobileMenu()">Galeri</a>
+                <a class="font-label-md text-body-lg text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-outline-variant/10" href="{{ route('schedule.index') }}" onclick="closeMobileMenu()">Jadwal</a>
+                <a class="font-label-md text-body-lg text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-outline-variant/10" href="{{ route('home') }}#lokasi" onclick="closeMobileMenu()">Lokasi</a>
+                <a class="font-label-md text-body-lg text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-outline-variant/10" href="{{ route('home') }}#kontak" onclick="closeMobileMenu()">Kontak</a>
+            </nav>
+        </div>
+
+        @auth
+            <div class="pt-6 border-t border-outline-variant/20">
+                <a href="{{ route('admin.dashboard') }}" class="w-full bg-primary text-on-primary text-center py-3 rounded-lg font-bold text-sm block">Dashboard Admin</a>
+            </div>
+        @endauth
+    </aside>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const btn = document.getElementById('mobile-menu-btn');
+            const closeBtn = document.getElementById('mobile-menu-close');
+            const overlay = document.getElementById('mobile-menu-overlay');
+            const drawer = document.getElementById('mobile-menu-drawer');
+
+            function openMobileMenu() {
+                overlay.classList.remove('hidden');
+                setTimeout(() => {
+                    overlay.classList.remove('opacity-0');
+                    drawer.classList.remove('translate-x-full');
+                }, 10);
+            }
+
+            window.closeMobileMenu = function() {
+                drawer.classList.add('translate-x-full');
+                overlay.classList.add('opacity-0');
+                setTimeout(() => {
+                    overlay.classList.add('hidden');
+                }, 300);
+            };
+
+            if (btn) btn.addEventListener('click', openMobileMenu);
+            if (closeBtn) closeBtn.addEventListener('click', closeMobileMenu);
+            if (overlay) overlay.addEventListener('click', closeMobileMenu);
+        });
+    </script>
 
     <main>
         @yield('content')
