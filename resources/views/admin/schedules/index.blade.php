@@ -1,55 +1,59 @@
 @extends('layouts.admin')
 
 @section('title', 'Kelola Jadwal Latihan')
-@section('header_title', 'Kelola Jadwal Latihan')
+@section('header_title', 'Kelola Jadwal Latihan Rutin')
 
 @section('content')
-    <div class="admin-card">
-        <div class="d-flex justify-between align-center" style="margin-bottom: 30px;">
-            <h3 style="font-family: var(--font-body); font-weight: 700; font-size: 1.2rem;">📅 Daftar Kelas & Jadwal Tari</h3>
-            <a href="{{ route('admin.schedules.create') }}" class="btn btn-primary btn-sm">+ Tambah Jadwal Latihan</a>
-        </div>
+<div class="bg-surface-container-low border border-gold-subtle rounded-xl p-6 md:p-8">
+    <div class="flex justify-between items-center mb-6">
+        <h3 class="font-headline-md text-xl font-bold text-primary flex items-center gap-2">
+            <span class="material-symbols-outlined">calendar_month</span> Daftar Program & Jadwal Latihan
+        </h3>
+        <a href="{{ route('admin.schedules.create') }}" class="bg-primary text-on-primary px-5 py-2 rounded-lg font-bold text-sm hover:brightness-110 transition-all inline-flex items-center gap-2">
+            <span class="material-symbols-outlined text-base">add</span> Tambah Jadwal
+        </a>
+    </div>
 
-        @if($schedules->isEmpty())
-            <div style="text-align: center; padding: 40px; color: var(--text-muted);">
-                Belum ada jadwal latihan. Klik tombol di atas untuk menambah kelas pertama Anda!
-            </div>
-        @else
-            <table class="admin-table">
-                <thead>
+    @if($schedules->isEmpty())
+        <div class="text-center py-10 text-on-surface-variant border border-dashed border-outline-variant/30 rounded-xl">
+            Belum ada jadwal latihan yang ditambahkan saat ini.
+        </div>
+    @else
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm text-on-surface">
+                <thead class="bg-surface-container-high text-primary uppercase text-xs tracking-wider border-b border-gold-subtle">
                     <tr>
-                        <th>Hari</th>
-                        <th>Nama Kelas</th>
-                        <th>Waktu (Jam)</th>
-                        <th>Pelatih (Instruktur)</th>
-                        <th>Keterangan</th>
-                        <th style="width: 180px; text-align: right;">Aksi</th>
+                        <th class="p-4">Hari</th>
+                        <th class="p-4">Waktu / Jam</th>
+                        <th class="p-4">Nama Kelas / Program</th>
+                        <th class="p-4">Pelatih / Pengajar</th>
+                        <th class="p-4">Aksi</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="divide-y divide-outline-variant/20">
                     @foreach($schedules as $schedule)
-                        <tr>
-                            <td>
-                                <span class="day-badge">{{ $schedule->day }}</span>
-                            </td>
-                            <td style="font-weight: 600; color: var(--primary);">{{ $schedule->class_name }}</td>
-                            <td style="font-weight: 600;">{{ $schedule->time }}</td>
-                            <td>👤 {{ $schedule->instructor ?? 'Staf Sanggar' }}</td>
-                            <td style="color: var(--text-muted); font-size: 0.9rem;">{{ $schedule->description ?? '-' }}</td>
-                            <td style="text-align: right;">
-                                <div class="admin-actions" style="justify-content: flex-end;">
-                                    <a href="{{ route('admin.schedules.edit', $schedule->id) }}" class="btn btn-secondary btn-sm" style="padding: 6px 12px; font-size: 0.8rem;">✏️ Edit</a>
-                                    
-                                    <form action="{{ route('admin.schedules.destroy', $schedule->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus jadwal kelas ini?')">
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger btn-sm" style="padding: 6px 12px; font-size: 0.8rem;">🗑️ Hapus</button>
-                                    </form>
-                                </div>
+                        <tr class="hover:bg-surface-container-high/50 transition-colors">
+                            <td class="p-4 font-bold text-primary uppercase">{{ $schedule->day }}</td>
+                            <td class="p-4 text-on-surface-variant">{{ $schedule->time }}</td>
+                            <td class="p-4 font-bold text-on-surface">{{ $schedule->class_name }}</td>
+                            <td class="p-4 text-on-surface-variant">{{ $schedule->instructor ?? '-' }}</td>
+                            <td class="p-4 flex items-center gap-2">
+                                <a href="{{ route('admin.schedules.edit', $schedule->id) }}" class="border border-primary text-primary px-3 py-1 rounded text-xs hover:bg-primary/10 transition-all inline-flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-sm">edit</span> Edit
+                                </a>
+                                <form action="{{ route('admin.schedules.destroy', $schedule->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus jadwal ini?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="border border-red-500/50 text-red-400 px-3 py-1 rounded text-xs hover:bg-red-500/10 transition-all inline-flex items-center gap-1">
+                                        <span class="material-symbols-outlined text-sm">delete</span> Hapus
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-        @endif
-    </div>
+        </div>
+    @endif
+</div>
 @endsection

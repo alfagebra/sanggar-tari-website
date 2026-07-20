@@ -1,80 +1,67 @@
 @extends('layouts.admin')
 
 @section('title', 'Kelola Artikel')
-@section('header_title', 'Kelola Artikel')
+@section('header_title', 'Kelola Artikel Kebudayaan')
 
 @section('content')
-    <div class="admin-card">
-        <div class="d-flex justify-between align-center" style="margin-bottom: 30px;">
-            <h3 style="font-family: var(--font-body); font-weight: 700; font-size: 1.2rem;">📰 Daftar Artikel Terbit</h3>
-            <a href="{{ route('admin.articles.create') }}" class="btn btn-primary btn-sm">+ Tulis Artikel Baru</a>
-        </div>
+<div class="bg-surface-container-low border border-gold-subtle rounded-xl p-6 md:p-8">
+    <div class="flex justify-between items-center mb-6">
+        <h3 class="font-headline-md text-xl font-bold text-primary flex items-center gap-2">
+            <span class="material-symbols-outlined">newspaper</span> Daftar Artikel
+        </h3>
+        <a href="{{ route('admin.articles.create') }}" class="bg-primary text-on-primary px-5 py-2 rounded-lg font-bold text-sm hover:brightness-110 transition-all inline-flex items-center gap-2">
+            <span class="material-symbols-outlined text-base">add</span> Buat Artikel
+        </a>
+    </div>
 
-        @if($articles->isEmpty())
-            <div style="text-align: center; padding: 40px; color: var(--text-muted);">
-                Belum ada artikel. Klik tombol di atas untuk menulis artikel pertama Anda!
-            </div>
-        @else
-            <table class="admin-table">
-                <thead>
+    @if($articles->isEmpty())
+        <div class="text-center py-10 text-on-surface-variant border border-dashed border-outline-variant/30 rounded-xl">
+            Belum ada artikel yang diterbitkan saat ini.
+        </div>
+    @else
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm text-on-surface">
+                <thead class="bg-surface-container-high text-primary uppercase text-xs tracking-wider border-b border-gold-subtle">
                     <tr>
-                        <th style="width: 80px;">Gambar</th>
-                        <th>Judul Artikel</th>
-                        <th style="width: 150px;">Tanggal Terbit</th>
-                        <th style="width: 180px; text-align: right;">Aksi</th>
+                        <th class="p-4">Gambar</th>
+                        <th class="p-4">Judul Artikel</th>
+                        <th class="p-4">Tanggal Rilis</th>
+                        <th class="p-4">Aksi</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="divide-y divide-outline-variant/20">
                     @foreach($articles as $article)
-                        <tr>
-                            <td>
+                        <tr class="hover:bg-surface-container-high/50 transition-colors">
+                            <td class="p-4">
                                 @if($article->image_url)
-                                    <img src="{{ Storage::url($article->image_url) }}" alt="Preview" class="admin-img-preview">
+                                    <img src="{{ Str::startsWith($article->image_url, ['http://', 'https://']) ? $article->image_url : Storage::url($article->image_url) }}" alt="Preview" class="w-16 h-12 rounded object-cover border border-gold-subtle">
                                 @else
-                                    <span style="font-size: 0.75rem; color: var(--text-muted); background: var(--light); padding: 4px 8px; border-radius: var(--radius-sm);">No Image</span>
+                                    <span class="text-xs text-on-surface-variant">No Image</span>
                                 @endif
                             </td>
-                            <td style="font-weight: 600;">
-                                <a href="{{ route('articles.show', $article->slug) }}" target="_blank" style="color: var(--dark);">
-                                    {{ $article->title }}
+                            <td class="p-4 font-bold text-on-surface">{{ $article->title }}</td>
+                            <td class="p-4 text-on-surface-variant">{{ $article->created_at->format('d M Y') }}</td>
+                            <td class="p-4 flex items-center gap-2">
+                                <a href="{{ route('admin.articles.edit', $article->id) }}" class="border border-primary text-primary px-3 py-1 rounded text-xs hover:bg-primary/10 transition-all inline-flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-sm">edit</span> Edit
                                 </a>
-                            </td>
-                            <td>{{ $article->created_at->format('d M Y') }}</td>
-                            <td style="text-align: right;">
-                                <div class="admin-actions" style="justify-content: flex-end;">
-                                    <a href="{{ route('admin.articles.edit', $article->id) }}" class="btn btn-secondary btn-sm" style="padding: 6px 12px; font-size: 0.8rem;">✏️ Edit</a>
-                                    
-                                    <form action="{{ route('admin.articles.destroy', $article->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus artikel ini?')">
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger btn-sm" style="padding: 6px 12px; font-size: 0.8rem;">🗑️ Hapus</button>
-                                    </form>
-                                </div>
+                                <form action="{{ route('admin.articles.destroy', $article->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus artikel ini?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="border border-red-500/50 text-red-400 px-3 py-1 rounded text-xs hover:bg-red-500/10 transition-all inline-flex items-center gap-1">
+                                        <span class="material-symbols-outlined text-sm">delete</span> Hapus
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+        </div>
 
-            <!-- Custom Pagination -->
-            @if($articles->lastPage() > 1)
-                <div class="pagination-wrapper" style="margin-top: 30px;">
-                    @if ($articles->onFirstPage())
-                        <span class="btn btn-outline btn-sm" style="opacity: 0.5; cursor: not-allowed;">&larr; Prev</span>
-                    @else
-                        <a href="{{ $articles->previousPageUrl() }}" class="btn btn-outline btn-sm">&larr; Prev</a>
-                    @endif
-
-                    <span style="align-self: center; font-weight: 600; color: var(--text-muted); font-size: 0.85rem; margin: 0 15px;">
-                        {{ $articles->currentPage() }} / {{ $articles->lastPage() }}
-                    </span>
-
-                    @if ($articles->hasMorePages())
-                        <a href="{{ $articles->nextPageUrl() }}" class="btn btn-outline btn-sm">Next &rarr;</a>
-                    @else
-                        <span class="btn btn-outline btn-sm" style="opacity: 0.5; cursor: not-allowed;">Next &rarr;</span>
-                    @endif
-                </div>
-            @endif
-        @endif
-    </div>
+        <div class="mt-6">
+            {{ $articles->links() }}
+        </div>
+    @endif
+</div>
 @endsection

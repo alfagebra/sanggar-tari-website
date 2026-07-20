@@ -4,95 +4,95 @@
 @section('header_title', 'Kelola Profil Sanggar')
 
 @section('content')
-    <div class="admin-card">
-        <form action="{{ route('admin.profile.update') }}" method="POST" enctype="multipart/form-data">
-            @csrf
+<div class="bg-surface-container-low border border-gold-subtle rounded-xl p-6 md:p-8">
+    <form action="{{ route('admin.profile.update') }}" method="POST" enctype="multipart/form-data" class="space-y-8">
+        @csrf
+        
+        <div>
+            <h3 class="font-headline-md text-xl font-bold text-primary mb-4 pb-2 border-b border-outline-variant/20 flex items-center gap-2">
+                <span class="material-symbols-outlined">history_edu</span> Konten Profil & Sejarah
+            </h3>
             
-            <div class="profile-form-grid">
-                <!-- Left Side: Main Form Fields -->
+            <div class="space-y-6">
                 <div>
-                    <h3 style="font-family: var(--font-body); font-weight: 700; margin-bottom: 24px; color: var(--primary); border-bottom: 1.5px solid var(--border); padding-bottom: 8px;">🏢 Konten Profil & Sejarah</h3>
-                    
-                    <div class="form-group">
-                        <label for="history" class="form-label">Sejarah Singkat Sanggar</label>
-                        <textarea name="history" id="history" class="form-control" style="min-height: 180px;" required>{{ old('history', $profile->history) }}</textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="vision" class="form-label">Visi Sanggar</label>
-                        <textarea name="vision" id="vision" class="form-control" style="min-height: 80px;" required>{{ old('vision', $profile->vision) }}</textarea>
-                    </div>
-
-                    <div class="form-group" style="margin-bottom: 40px;">
-                        <label for="mission" class="form-label">Misi Sanggar (Pisahkan per baris)</label>
-                        <textarea name="mission" id="mission" class="form-control" style="min-height: 120px;" required>{{ old('mission', $profile->mission) }}</textarea>
-                    </div>
-
-                    <h3 style="font-family: var(--font-body); font-weight: 700; margin-bottom: 24px; color: var(--primary); border-bottom: 1.5px solid var(--border); padding-bottom: 8px;">📞 Kontak & Informasi Resmi</h3>
-                    
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                        <div class="form-group">
-                            <label for="phone" class="form-label">No. Telepon / WhatsApp</label>
-                            <input type="text" name="phone" id="phone" class="form-control" placeholder="Contoh: 0812-3456-7890" value="{{ old('phone', $profile->phone) }}">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email" class="form-label">Alamat Email Resmi</label>
-                            <input type="email" name="email" id="email" class="form-control" placeholder="Contoh: info@sanggar.com" value="{{ old('email', $profile->email) }}">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="address" class="form-label">Alamat Lengkap Fisik</label>
-                        <input type="text" name="address" id="address" class="form-control" placeholder="Tuliskan nama jalan, RT/RW, kecamatan, kota/kabupaten" value="{{ old('address', $profile->address) }}">
-                    </div>
-
-                    <h3 style="font-family: var(--font-body); font-weight: 700; margin-top: 30px; margin-bottom: 24px; color: var(--primary); border-bottom: 1.5px solid var(--border); padding-bottom: 8px;">🔗 Media Sosial (Tulis Username Saja)</h3>
-                    
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px;">
-                        <div class="form-group">
-                            <label for="instagram" class="form-label">Username Instagram</label>
-                            <input type="text" name="instagram" id="instagram" class="form-control" placeholder="Contoh: sanggar_tari_indah" value="{{ old('instagram', $profile->instagram) }}">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="facebook" class="form-label">Nama Halaman Facebook</label>
-                            <input type="text" name="facebook" id="facebook" class="form-control" placeholder="Contoh: Sanggar Tari Indah" value="{{ old('facebook', $profile->facebook) }}">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="tiktok" class="form-label">Username TikTok</label>
-                            <input type="text" name="tiktok" id="tiktok" class="form-control" placeholder="Contoh: sanggar_tari_indah" value="{{ old('tiktok', $profile->tiktok) }}">
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary" style="height: 50px; padding: 0 40px;">
-                        💾 Simpan Perubahan Profil
-                    </button>
+                    <label for="history" class="block text-xs font-bold uppercase text-on-surface-variant mb-2">Sejarah Singkat Sanggar</label>
+                    <textarea name="history" id="history" rows="5" class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg p-4 text-sm text-white focus:outline-none focus:border-primary transition-all" required>{{ old('history', $profile->history) }}</textarea>
                 </div>
 
-                <!-- Right Side: Logo Upload Preview -->
                 <div>
-                    <h3 style="font-family: var(--font-body); font-weight: 700; margin-bottom: 24px; color: var(--primary); border-bottom: 1.5px solid var(--border); padding-bottom: 8px;">🎨 Logo Sanggar</h3>
-                    
-                    <div class="profile-logo-upload">
-                        @if($profile->logo_url)
-                            <img src="{{ Storage::url($profile->logo_url) }}" alt="Logo">
-                        @else
-                            <div style="background: var(--border); border-radius: 50%; width: 100px; height: 100px; line-height: 100px; font-size: 2.5rem; color: var(--text-muted); margin: 0 auto 16px;">🏢</div>
-                        @endif
-                        
-                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">Logo aktif saat ini. Anda dapat mengunggah file baru untuk menggantinya.</p>
-                        
-                        <div class="form-group" style="text-align: left;">
-                            <label for="logo" class="form-label">Pilih Logo Baru</label>
-                            <input type="file" name="logo" id="logo" class="form-control" style="background: #fff; padding: 8px;">
-                            <small style="color: var(--text-muted); display: block; margin-top: 6px;">Format: PNG, JPG, WebP. Maksimal 2MB.</small>
-                        </div>
-                    </div>
+                    <label for="vision" class="block text-xs font-bold uppercase text-on-surface-variant mb-2">Visi Sanggar</label>
+                    <textarea name="vision" id="vision" rows="3" class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg p-4 text-sm text-white focus:outline-none focus:border-primary transition-all" required>{{ old('vision', $profile->vision) }}</textarea>
+                </div>
+
+                <div>
+                    <label for="mission" class="block text-xs font-bold uppercase text-on-surface-variant mb-2">Misi Sanggar (Pisahkan per baris)</label>
+                    <textarea name="mission" id="mission" rows="4" class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg p-4 text-sm text-white focus:outline-none focus:border-primary transition-all" required>{{ old('mission', $profile->mission) }}</textarea>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h3 class="font-headline-md text-xl font-bold text-primary mb-4 pb-2 border-b border-outline-variant/20 flex items-center gap-2">
+                <span class="material-symbols-outlined">call</span> Kontak & Informasi Resmi
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="phone" class="block text-xs font-bold uppercase text-on-surface-variant mb-2">No. Telepon / WhatsApp</label>
+                    <input type="text" name="phone" id="phone" class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-primary transition-all" value="{{ old('phone', $profile->phone) }}">
+                </div>
+
+                <div>
+                    <label for="email" class="block text-xs font-bold uppercase text-on-surface-variant mb-2">Alamat Email Resmi</label>
+                    <input type="email" name="email" id="email" class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-primary transition-all" value="{{ old('email', $profile->email) }}">
                 </div>
             </div>
 
-        </form>
-    </div>
+            <div class="mt-6">
+                <label for="address" class="block text-xs font-bold uppercase text-on-surface-variant mb-2">Alamat Lengkap Fisik</label>
+                <input type="text" name="address" id="address" class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-primary transition-all" value="{{ old('address', $profile->address) }}">
+            </div>
+        </div>
+
+        <div>
+            <h3 class="font-headline-md text-xl font-bold text-primary mb-4 pb-2 border-b border-outline-variant/20 flex items-center gap-2">
+                <span class="material-symbols-outlined">share</span> Media Sosial (Username Saja)
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                    <label for="instagram" class="block text-xs font-bold uppercase text-on-surface-variant mb-2">Instagram</label>
+                    <input type="text" name="instagram" id="instagram" class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-primary transition-all" value="{{ old('instagram', $profile->instagram) }}">
+                </div>
+
+                <div>
+                    <label for="facebook" class="block text-xs font-bold uppercase text-on-surface-variant mb-2">Facebook</label>
+                    <input type="text" name="facebook" id="facebook" class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-primary transition-all" value="{{ old('facebook', $profile->facebook) }}">
+                </div>
+
+                <div>
+                    <label for="tiktok" class="block text-xs font-bold uppercase text-on-surface-variant mb-2">TikTok</label>
+                    <input type="text" name="tiktok" id="tiktok" class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-primary transition-all" value="{{ old('tiktok', $profile->tiktok) }}">
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h3 class="font-headline-md text-xl font-bold text-primary mb-4 pb-2 border-b border-outline-variant/20 flex items-center gap-2">
+                <span class="material-symbols-outlined">image</span> Logo Sanggar
+            </h3>
+            
+            <div class="flex items-center gap-6">
+                @if($profile->logo_url)
+                    <img src="{{ Str::startsWith($profile->logo_url, ['http://', 'https://']) ? $profile->logo_url : Storage::url($profile->logo_url) }}" alt="Logo Current" class="w-20 h-20 rounded-full object-cover border border-primary">
+                @endif
+                <input type="file" name="logo" id="logo" class="text-sm text-on-surface-variant file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-primary file:text-on-primary hover:file:brightness-110">
+            </div>
+        </div>
+
+        <button type="submit" class="bg-primary text-on-primary px-8 py-4 rounded-lg font-bold text-sm hover:brightness-110 transition-all shadow-lg inline-flex items-center gap-2">
+            <span class="material-symbols-outlined">save</span> Simpan Perubahan Profil
+        </button>
+    </form>
+</div>
 @endsection

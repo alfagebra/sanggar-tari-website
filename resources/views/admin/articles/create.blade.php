@@ -1,49 +1,36 @@
 @extends('layouts.admin')
 
-@section('title', 'Tulis Artikel Baru')
-@section('header_title', 'Tulis Artikel Baru')
+@section('title', 'Buat Artikel Baru')
+@section('header_title', 'Buat Artikel Kebudayaan Baru')
 
 @section('content')
-    <div class="admin-card">
-        <a href="{{ route('admin.articles') }}" style="color: var(--primary); font-weight: 700; font-size: 0.9rem; display: inline-block; margin-bottom: 20px;">
-            &larr; Kembali ke Daftar Artikel
-        </a>
+<div class="bg-surface-container-low border border-gold-subtle rounded-xl p-6 md:p-8 max-w-3xl">
+    <form action="{{ route('admin.articles.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+        @csrf
 
-        @if($errors->any())
-            <div class="alert alert-danger">
-                <ul style="list-style: none;">
-                    @foreach($errors->all() as $error)
-                        <li>⚠️ {{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+        <div>
+            <label for="title" class="block text-xs font-bold uppercase text-on-surface-variant mb-2">Judul Artikel</label>
+            <input type="text" name="title" id="title" class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-primary transition-all" value="{{ old('title') }}" required placeholder="Masukkan judul artikel kebudayaan...">
+        </div>
 
-        <form action="{{ route('admin.articles.store') }}" method="POST" enctype="multipart/form-data" style="max-width: 800px;">
-            @csrf
+        <div>
+            <label for="image" class="block text-xs font-bold uppercase text-on-surface-variant mb-2">Gambar Utama Artikel (Opsional)</label>
+            <input type="file" name="image" id="image" class="text-sm text-on-surface-variant file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-primary file:text-on-primary hover:file:brightness-110">
+        </div>
 
-            <div class="form-group">
-                <label for="title" class="form-label">Judul Artikel</label>
-                <input type="text" name="title" id="title" class="form-control" placeholder="Tuliskan judul artikel yang menarik" value="{{ old('title') }}" required autofocus>
-            </div>
+        <div>
+            <label for="content" class="block text-xs font-bold uppercase text-on-surface-variant mb-2">Isi Lengkap Artikel</label>
+            <textarea name="content" id="content" rows="10" class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg p-4 text-sm text-white focus:outline-none focus:border-primary transition-all" required placeholder="Tuliskan cerita atau isi artikel di sini...">{{ old('content') }}</textarea>
+        </div>
 
-            <div class="form-group">
-                <label for="image" class="form-label">Gambar Utama / Banner Artikel</label>
-                <input type="file" name="image" id="image" class="form-control" style="background: var(--light); padding: 8px;">
-                <small style="color: var(--text-muted); display: block; margin-top: 6px;">Format: PNG, JPG, JPEG, WebP. Maksimal 4MB (Disarankan landscape).</small>
-            </div>
-
-            <div class="form-group">
-                <label for="content" class="form-label">Isi Konten Artikel</label>
-                <textarea name="content" id="content" class="form-control" style="min-height: 350px;" placeholder="Tulis cerita, liputan kegiatan, atau materi kebudayaan di sini..." required>{{ old('content') }}</textarea>
-            </div>
-
-            <div style="margin-top: 30px; border-top: 1px solid var(--border); padding-top: 20px;">
-                <button type="submit" class="btn btn-primary" style="padding: 0 40px; height: 48px;">
-                    🚀 Terbitkan Artikel
-                </button>
-                <a href="{{ route('admin.articles') }}" class="btn btn-outline" style="padding: 12px 28px; font-weight: 600;">Batal</a>
-            </div>
-        </form>
-    </div>
+        <div class="flex gap-4 pt-4">
+            <button type="submit" class="bg-primary text-on-primary px-6 py-3 rounded-lg font-bold text-sm hover:brightness-110 transition-all inline-flex items-center gap-2">
+                <span class="material-symbols-outlined text-base">save</span> Terbitkan Artikel
+            </button>
+            <a href="{{ route('admin.articles') }}" class="border border-outline-variant text-on-surface-variant px-6 py-3 rounded-lg font-bold text-sm hover:bg-surface-container-high transition-all">
+                Batal
+            </a>
+        </div>
+    </form>
+</div>
 @endsection
