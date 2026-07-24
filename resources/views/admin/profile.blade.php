@@ -14,6 +14,12 @@
             </h3>
             
             <div class="space-y-6">
+                <!-- SANGGAR BRAND NAME (Nama Sanggar di samping logo) -->
+                <div>
+                    <label for="name" class="block text-xs font-bold uppercase admin-muted-color mb-2 tracking-wider">Nama Sanggar (Di Samping Logo)</label>
+                    <input type="text" name="name" id="name" class="w-full admin-card-alt-color border admin-border-color rounded-xl px-4 py-3.5 text-sm admin-text-color focus:outline-none focus:border-[#b8860b] transition-all" value="{{ old('name', $profile->name) }}" required placeholder="Contoh: GSBK Candi">
+                </div>
+
                 <div>
                     <label for="history" class="block text-xs font-bold uppercase admin-muted-color mb-2 tracking-wider">Sejarah Singkat Sanggar</label>
                     <textarea name="history" id="history" rows="5" class="w-full admin-card-alt-color border admin-border-color rounded-xl p-4 text-sm admin-text-color focus:outline-none focus:border-[#b8860b] transition-all" required>{{ old('history', $profile->history) }}</textarea>

@@ -32,6 +32,7 @@ class DashboardController extends Controller
     public function profileEdit()
     {
         $profile = Profile::firstOrCreate([], [
+            'name' => 'GSBK Candi',
             'history' => 'Sejarah sanggar belum diisi.',
             'vision' => 'Visi belum diisi.',
             'mission' => 'Misi belum diisi.',
@@ -44,6 +45,7 @@ class DashboardController extends Controller
         $profile = Profile::first();
 
         $data = $request->validate([
+            'name' => 'required|string|max:255',
             'history' => 'required|string',
             'vision' => 'required|string',
             'mission' => 'required|string',

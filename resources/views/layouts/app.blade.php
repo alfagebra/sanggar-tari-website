@@ -6,16 +6,27 @@
     <title>@yield('title', 'GSBK Candi') - Gubug Seni Begog Kiyatdiharjan</title>
     <meta name="description" content="@yield('meta_description', 'Website Resmi Sanggar Seni Tari Tradisional. Menyediakan informasi profil, sejarah, galeri pentas, dan jadwal latihan tari.')">
     
-    <!-- Theme Initializer (Prevents Flash) -->
+    <!-- Theme Initializer (System Theme Detection & Sync) -->
     <script>
         (function() {
-            const savedTheme = localStorage.getItem('publicTheme') || 'dark';
-            if (savedTheme === 'light') {
-                document.documentElement.classList.remove('dark');
-                document.documentElement.classList.add('light');
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                if (savedTheme === 'light') {
+                    document.documentElement.classList.remove('dark');
+                    document.documentElement.classList.add('light');
+                } else {
+                    document.documentElement.classList.remove('light');
+                    document.documentElement.classList.add('dark');
+                }
             } else {
-                document.documentElement.classList.remove('light');
-                document.documentElement.classList.add('dark');
+                const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (systemPrefersDark) {
+                    document.documentElement.classList.remove('light');
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    document.documentElement.classList.add('light');
+                }
             }
         })();
     </script>
@@ -135,7 +146,7 @@
                 @if($layoutProfile && $layoutProfile->logo_url)
                     <img src="{{ Str::startsWith($layoutProfile->logo_url, ['http://', 'https://']) ? $layoutProfile->logo_url : Storage::url($layoutProfile->logo_url) }}" alt="Logo" class="w-10 h-10 rounded-full object-cover">
                 @endif
-                GSBK Candi
+                {{ $layoutProfile->name ?? 'GSBK Candi' }}
             </a>
             
             <!-- Navigation Links -->
@@ -175,7 +186,7 @@
         <div>
             <!-- Header with Close Button -->
             <div class="flex justify-between items-center pb-6 border-b border-gold-subtle mb-8">
-                <a class="font-headline-md text-xl font-bold text-primary tracking-tight" href="{{ route('home') }}">GSBK Candi</a>
+                <a class="font-headline-md text-xl font-bold text-primary tracking-tight" href="{{ route('home') }}">{{ $layoutProfile->name ?? 'GSBK Candi' }}</a>
                 <button id="mobile-menu-close" type="button" class="text-on-surface-variant hover:text-primary transition-colors p-1 focus:outline-none">
                     <span class="material-symbols-outlined text-2xl">close</span>
                 </button>
@@ -214,7 +225,7 @@
         <div class="max-w-container-max mx-auto px-4 md:px-margin-desktop">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
                 <div class="md:col-span-2">
-                    <a class="font-headline-md text-headline-md text-primary mb-6 block" href="{{ route('home') }}">GSBK Candi</a>
+                    <a class="font-headline-md text-headline-md text-primary mb-6 block" href="{{ route('home') }}">{{ $layoutProfile->name ?? 'GSBK Candi' }}</a>
                     <p class="font-body-md text-body-md text-on-surface-variant max-w-sm">
                         Gubug Seni Begog Kiyatdiharjan didedikasikan untuk pelestarian, edukasi, dan apresiasi seni tradisi Jawa demi terjaganya identitas bangsa.
                     </p>
@@ -239,7 +250,7 @@
             </div>
             <div class="flex flex-col md:flex-row justify-between items-center pt-10 border-t border-gold-subtle gap-4 text-center md:text-left">
                 <p class="font-label-md text-label-md text-on-surface-variant">
-                    © 2026 Gubug Seni Begog Kiyatdiharjan. Preserving Javanese Heritage.
+                    © 2026 {{ $layoutProfile->name ?? 'Gubug Seni Begog Kiyatdiharjan' }}. Preserving Javanese Heritage.
                 </p>
                 <p class="font-label-md text-label-md text-on-surface-variant">
                     Developed with <span class="text-red-500">♥</span> by <span class="text-primary font-bold">KKN.UPNYK.84.309</span>
@@ -270,17 +281,31 @@
                 if (document.documentElement.classList.contains('dark')) {
                     document.documentElement.classList.remove('dark');
                     document.documentElement.classList.add('light');
-                    localStorage.setItem('publicTheme', 'light');
+                    localStorage.setItem('theme', 'light');
                 } else {
                     document.documentElement.classList.remove('light');
                     document.documentElement.classList.add('dark');
-                    localStorage.setItem('publicTheme', 'dark');
+                    localStorage.setItem('theme', 'dark');
                 }
                 updateUI();
             }
 
             if (publicBtn) publicBtn.addEventListener('click', toggleTheme);
             if (mobileBtn) mobileBtn.addEventListener('click', toggleTheme);
+
+            // Listen to system preferences dynamically
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                if (!localStorage.getItem('theme')) {
+                    if (e.matches) {
+                        document.documentElement.classList.remove('light');
+                        document.documentElement.classList.add('dark');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                        document.documentElement.classList.add('light');
+                    }
+                    updateUI();
+                }
+            });
 
             // Mobile Menu Drawer Logic
             const menuBtn = document.getElementById('mobile-menu-btn');

@@ -11,16 +11,27 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Manrope:wght@200..800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     
-    <!-- Theme Initializer -->
+    <!-- Theme Initializer (System Theme Detection & Sync) -->
     <script>
         (function() {
-            const savedTheme = localStorage.getItem('adminTheme') || 'light';
-            if (savedTheme === 'light') {
-                document.documentElement.classList.remove('dark');
-                document.documentElement.classList.add('light');
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                if (savedTheme === 'light') {
+                    document.documentElement.classList.remove('dark');
+                    document.documentElement.classList.add('light');
+                } else {
+                    document.documentElement.classList.remove('light');
+                    document.documentElement.classList.add('dark');
+                }
             } else {
-                document.documentElement.classList.remove('light');
-                document.documentElement.classList.add('dark');
+                const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (systemPrefersDark) {
+                    document.documentElement.classList.remove('light');
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    document.documentElement.classList.add('light');
+                }
             }
         })();
     </script>
@@ -40,7 +51,7 @@
       }
     </script>
     <style>
-        /* Light Theme (Clean, Soft Warm Cream - Lightweight & Professional) */
+        /* Light Theme (Clean, Soft Warm Cream) */
         html.light {
             --admin-bg: #fcf9f2;
             --admin-sidebar: #f8f3e8;
@@ -88,6 +99,22 @@
         .admin-text-color { color: var(--admin-text); }
         .admin-muted-color { color: var(--admin-muted); }
         .admin-accent-color { color: var(--admin-accent); }
+
+        /* Force input text & textareas to have high contrast colors */
+        input[type="text"], input[type="email"], input[type="password"], textarea, select {
+            background-color: var(--admin-card-alt) !important;
+            color: var(--admin-text) !important;
+            border: 2px solid var(--admin-border) !important;
+            border-radius: 0.75rem !important;
+            padding: 0.875rem 1rem !important;
+            font-size: 0.875rem !important;
+            outline: none !important;
+            transition: all 0.2s ease-in-out !important;
+        }
+        input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
+            border-color: var(--admin-accent) !important;
+            box-shadow: 0 0 0 1px var(--admin-accent) !important;
+        }
     </style>
 </head>
 <body class="admin-bg-color admin-text-color batik-overlay min-h-screen transition-colors duration-300">
@@ -96,9 +123,80 @@
         $adminProfile = \App\Models\Profile::first();
     @endphp
 
+    <!-- Mobile Header Bar (Visible on mobile/tablet) -->
+    <header class="md:hidden flex items-center justify-between p-4 border-b admin-border-color admin-sidebar-color transition-colors duration-300">
+        <a class="font-headline-md font-bold admin-accent-color text-lg flex items-center gap-2" href="{{ route('admin.dashboard') }}">
+            @if($adminProfile && $adminProfile->logo_url)
+                <img src="{{ Str::startsWith($adminProfile->logo_url, ['http://', 'https://']) ? $adminProfile->logo_url : Storage::url($adminProfile->logo_url) }}" alt="Logo" class="w-8 h-8 rounded-full object-cover">
+            @endif
+            {{ $adminProfile->name ?? 'GSBK Candi' }}
+        </a>
+        
+        <div class="flex items-center gap-3">
+            <button id="theme-toggle-mobile" class="admin-accent-color focus:outline-none p-1">
+                <span class="material-symbols-outlined text-2xl">light_mode</span>
+            </button>
+            <button id="admin-mobile-btn" class="admin-accent-color focus:outline-none p-1">
+                <span class="material-symbols-outlined text-2xl">menu</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer Overlay -->
+    <div id="admin-mobile-overlay" class="fixed inset-0 bg-black/60 z-40 hidden transition-opacity duration-300 opacity-0"></div>
+
+    <!-- Mobile Sidebar Drawer -->
+    <aside id="admin-mobile-drawer" class="fixed top-0 left-0 w-72 h-full admin-sidebar-color border-r admin-border-color z-50 p-6 flex flex-col justify-between transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden">
+        <div>
+            <div class="flex justify-between items-center pb-6 border-b admin-border-color mb-8">
+                <span class="font-headline-md font-bold admin-accent-color text-lg">{{ $adminProfile->name ?? 'GSBK Candi' }}</span>
+                <button id="admin-mobile-close" class="admin-text-color focus:outline-none p-1">
+                    <span class="material-symbols-outlined text-2xl">close</span>
+                </button>
+            </div>
+            
+            <nav class="space-y-3">
+                <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm transition-all {{ request()->routeIs('admin.dashboard') ? 'bg-[var(--admin-nav-active-bg)] text-[var(--admin-nav-active-text)]' : 'admin-text-color' }}">
+                    <span class="material-symbols-outlined text-xl">dashboard</span>
+                    Ikhtisar Dashboard
+                </a>
+                <a href="{{ route('admin.profile') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm transition-all {{ request()->routeIs('admin.profile') ? 'bg-[var(--admin-nav-active-bg)] text-[var(--admin-nav-active-text)]' : 'admin-text-color' }}">
+                    <span class="material-symbols-outlined text-xl">account_balance</span>
+                    Profil Sanggar
+                </a>
+                <a href="{{ route('admin.articles') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm transition-all {{ request()->routeIs('admin.articles') || request()->routeIs('admin.articles.*') ? 'bg-[var(--admin-nav-active-bg)] text-[var(--admin-nav-active-text)]' : 'admin-text-color' }}">
+                    <span class="material-symbols-outlined text-xl">newspaper</span>
+                    Kelola Artikel
+                </a>
+                <a href="{{ route('admin.galleries') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm transition-all {{ request()->routeIs('admin.galleries') || request()->routeIs('admin.galleries.*') ? 'bg-[var(--admin-nav-active-bg)] text-[var(--admin-nav-active-text)]' : 'admin-text-color' }}">
+                    <span class="material-symbols-outlined text-xl">photo_library</span>
+                    Kelola Galeri
+                </a>
+                <a href="{{ route('admin.schedules') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm transition-all {{ request()->routeIs('admin.schedules') || request()->routeIs('admin.schedules.*') ? 'bg-[var(--admin-nav-active-bg)] text-[var(--admin-nav-active-text)]' : 'admin-text-color' }}">
+                    <span class="material-symbols-outlined text-xl">calendar_month</span>
+                    Kelola Jadwal
+                </a>
+                <a href="{{ route('home') }}" target="_blank" class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm admin-muted-color transition-all">
+                    <span class="material-symbols-outlined text-xl">open_in_new</span>
+                    Lihat Website
+                </a>
+            </nav>
+        </div>
+
+        <div class="pt-6 border-t admin-border-color mt-8">
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm text-red-600 bg-red-500/10 hover:bg-red-500/20 transition-all border border-red-500/20">
+                    <span class="material-symbols-outlined text-xl">logout</span>
+                    Keluar (Logout)
+                </button>
+            </form>
+        </div>
+    </aside>
+
     <div class="flex flex-col md:flex-row min-h-screen">
-        <!-- Sidebar -->
-        <aside class="w-full md:w-72 admin-sidebar-color border-r border-gold-subtle p-6 flex flex-col justify-between shadow-sm transition-colors duration-300">
+        <!-- Desktop Sidebar -->
+        <aside class="hidden md:flex w-72 admin-sidebar-color border-r admin-border-color p-6 flex-col justify-between shadow-sm transition-colors duration-300">
             <div>
                 <!-- Sidebar Logo -->
                 <div class="flex items-center gap-3 pb-6 border-b admin-border-color mb-8">
@@ -108,7 +206,7 @@
                         <div class="w-10 h-10 rounded-full bg-primary text-on-primary font-bold flex items-center justify-center font-headline-md text-lg shadow-sm">GSBK</div>
                     @endif
                     <div>
-                        <h3 class="font-headline-md font-bold admin-accent-color text-xl">GSBK Candi</h3>
+                        <h3 class="font-headline-md font-bold admin-accent-color text-xl">{{ $adminProfile->name ?? 'GSBK Candi' }}</h3>
                         <p class="text-xs admin-muted-color">Panel Admin Sanggar</p>
                     </div>
                 </div>
@@ -164,8 +262,8 @@
                 </div>
                 
                 <div class="flex items-center gap-4">
-                    <!-- Mode Switcher Button -->
-                    <button id="theme-toggle-btn" type="button" class="flex items-center gap-2 px-4 py-2 rounded-xl border admin-border-color admin-card-color admin-text-color hover:bg-black/5 dark:hover:bg-white/5 transition-all text-xs font-bold shadow-sm cursor-pointer" title="Ganti Mode Tampilan">
+                    <!-- Mode Switcher Button (Desktop only) -->
+                    <button id="theme-toggle-btn" type="button" class="hidden md:flex items-center gap-2 px-4 py-2 rounded-xl border admin-border-color admin-card-color admin-text-color hover:bg-black/5 dark:hover:bg-white/5 transition-all text-xs font-bold shadow-sm cursor-pointer" title="Ganti Mode Tampilan">
                         <span id="theme-toggle-icon" class="material-symbols-outlined text-lg admin-accent-color">light_mode</span>
                         <span id="theme-toggle-text">Mode Cream</span>
                     </button>
@@ -173,64 +271,87 @@
                     <!-- Admin User Badge -->
                     <div class="flex items-center gap-3 admin-card-color border admin-border-color px-4 py-2 rounded-xl shadow-sm">
                         <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
-                        <span class="text-sm font-semibold admin-text-color">Halo, {{ Auth::user()->name }}</span>
+                        <span class="text-sm font-semibold admin-text-color font-bold">Halo, {{ Auth::user()->name }}</span>
                     </div>
                 </div>
             </div>
-
-            <!-- Notification Messages -->
-            @if(session('success'))
-                <div class="mb-6 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 font-medium flex items-center gap-3 shadow-sm">
-                    <span class="material-symbols-outlined">check_circle</span>
-                    {{ session('success') }}
-                </div>
-            @endif
-
-            @if(session('error'))
-                <div class="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 font-medium flex items-center gap-3 shadow-sm">
-                    <span class="material-symbols-outlined">error</span>
-                    {{ session('error') }}
-                </div>
-            @endif
 
             <!-- Page Content Slot -->
             @yield('content')
         </main>
     </div>
 
-    <!-- Theme Toggle Script -->
+    <!-- Theme Toggle & Mobile Menu Script -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const toggleBtn = document.getElementById('theme-toggle-btn');
+            const toggleBtnMobile = document.getElementById('theme-toggle-mobile');
             const icon = document.getElementById('theme-toggle-icon');
             const text = document.getElementById('theme-toggle-text');
 
             function updateBtnUI() {
-                if (document.documentElement.classList.contains('light')) {
-                    if (icon) icon.textContent = 'dark_mode';
-                    if (text) text.textContent = 'Mode Dark';
-                } else {
-                    if (icon) icon.textContent = 'light_mode';
-                    if (text) text.textContent = 'Mode Cream';
-                }
+                const isLight = document.documentElement.classList.contains('light');
+                if (icon) icon.textContent = isLight ? 'dark_mode' : 'light_mode';
+                if (text) text.textContent = isLight ? 'Mode Dark' : 'Mode Cream';
             }
 
             updateBtnUI();
 
-            if (toggleBtn) {
-                toggleBtn.addEventListener('click', function() {
-                    if (document.documentElement.classList.contains('dark')) {
-                        document.documentElement.classList.remove('dark');
-                        document.documentElement.classList.add('light');
-                        localStorage.setItem('adminTheme', 'light');
-                    } else {
+            function toggleTheme() {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    document.documentElement.classList.add('light');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    document.documentElement.classList.remove('light');
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+                updateBtnUI();
+            }
+
+            if (toggleBtn) toggleBtn.addEventListener('click', toggleTheme);
+            if (toggleBtnMobile) toggleBtnMobile.addEventListener('click', toggleTheme);
+
+            // Listen to system preferences dynamically
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                if (!localStorage.getItem('theme')) {
+                    if (e.matches) {
                         document.documentElement.classList.remove('light');
                         document.documentElement.classList.add('dark');
-                        localStorage.setItem('adminTheme', 'dark');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                        document.documentElement.classList.add('light');
                     }
                     updateBtnUI();
-                });
+                }
+            });
+
+            // Mobile Menu Drawer Logic
+            const menuBtn = document.getElementById('admin-mobile-btn');
+            const closeBtn = document.getElementById('admin-mobile-close');
+            const overlay = document.getElementById('admin-mobile-overlay');
+            const drawer = document.getElementById('admin-mobile-drawer');
+
+            function openMobileMenu() {
+                overlay.classList.remove('hidden');
+                setTimeout(() => {
+                    overlay.classList.remove('opacity-0');
+                    drawer.classList.remove('-translate-x-full');
+                }, 10);
             }
+
+            function closeMobileMenu() {
+                drawer.classList.add('-translate-x-full');
+                overlay.classList.add('opacity-0');
+                setTimeout(() => {
+                    overlay.classList.add('hidden');
+                }, 300);
+            }
+
+            if (menuBtn) menuBtn.addEventListener('click', openMobileMenu);
+            if (closeBtn) closeBtn.addEventListener('click', closeMobileMenu);
+            if (overlay) overlay.addEventListener('click', closeMobileMenu);
         });
     </script>
 </body>
