@@ -33,6 +33,11 @@ class DashboardController extends Controller
     {
         $profile = Profile::firstOrCreate([], [
             'name' => 'GSBK Candi',
+            'hero_title' => 'Melestarikan Budaya, Menginspirasi Generasi',
+            'hero_subtitle' => 'Gubug Seni Begog Kiyatdiharjan hadir sebagai episentrum pelestarian seni tari dan karawitan di lereng Candi Mlese, menjaga nyala api tradisi tetap berkobar bagi masa depan.',
+            'founded_year' => '1998',
+            'quote_text' => 'Seni bukan sekadar tontonan, melainkan tuntunan hidup yang harus diwariskan dari satu tarikan napas ke tarikan napas berikutnya.',
+            'sejarah_subtitle' => 'Berlokasi tepat di kawasan bersejarah Candi Mlese, GSBK mengintegrasikan atmosfer sakral peninggalan masa lampau dengan semangat inovasi kontemporer, memastikan setiap gerakan tari dan ketukan gamelan memiliki makna yang dalam.',
             'history' => 'Sejarah sanggar belum diisi.',
             'vision' => 'Visi belum diisi.',
             'mission' => 'Misi belum diisi.',
@@ -46,6 +51,11 @@ class DashboardController extends Controller
 
         $data = $request->validate([
             'name' => 'required|string|max:255',
+            'hero_title' => 'required|string|max:255',
+            'hero_subtitle' => 'required|string',
+            'founded_year' => 'required|string|max:20',
+            'quote_text' => 'required|string',
+            'sejarah_subtitle' => 'required|string',
             'history' => 'required|string',
             'vision' => 'required|string',
             'mission' => 'required|string',
@@ -60,8 +70,12 @@ class DashboardController extends Controller
 
         if ($request->hasFile('logo')) {
             // Delete old logo if exists
-            if ($profile->logo_url) {
-                Storage::disk(config('filesystems.default'))->delete($profile->logo_url);
+            try {
+                if ($profile->logo_url && !Str::startsWith($profile->logo_url, ['http://', 'https://'])) {
+                    Storage::disk(config('filesystems.default'))->delete($profile->logo_url);
+                }
+            } catch (\Exception $e) {
+                \Log::warning("Supabase S3 logo delete failed: " . $e->getMessage());
             }
             $data['logo_url'] = $request->file('logo')->store('sanggar', config('filesystems.default'));
         }
@@ -127,8 +141,12 @@ class DashboardController extends Controller
 
         if ($request->hasFile('image')) {
             // Delete old image
-            if ($article->image_url) {
-                Storage::disk(config('filesystems.default'))->delete($article->image_url);
+            try {
+                if ($article->image_url && !Str::startsWith($article->image_url, ['http://', 'https://'])) {
+                    Storage::disk(config('filesystems.default'))->delete($article->image_url);
+                }
+            } catch (\Exception $e) {
+                \Log::warning("Supabase S3 article image update delete failed: " . $e->getMessage());
             }
             $data['image_url'] = $request->file('image')->store('sanggar', config('filesystems.default'));
         }
@@ -142,8 +160,12 @@ class DashboardController extends Controller
     {
         $article = Article::findOrFail($id);
 
-        if ($article->image_url) {
-            Storage::disk(config('filesystems.default'))->delete($article->image_url);
+        try {
+            if ($article->image_url && !Str::startsWith($article->image_url, ['http://', 'https://'])) {
+                Storage::disk(config('filesystems.default'))->delete($article->image_url);
+            }
+        } catch (\Exception $e) {
+            \Log::warning("Supabase S3 article image delete failed: " . $e->getMessage());
         }
 
         $article->delete();
@@ -184,8 +206,12 @@ class DashboardController extends Controller
     {
         $gallery = Gallery::findOrFail($id);
 
-        if ($gallery->image_url) {
-            Storage::disk(config('filesystems.default'))->delete($gallery->image_url);
+        try {
+            if ($gallery->image_url && !Str::startsWith($gallery->image_url, ['http://', 'https://'])) {
+                Storage::disk(config('filesystems.default'))->delete($gallery->image_url);
+            }
+        } catch (\Exception $e) {
+            \Log::warning("Supabase S3 delete failed: " . $e->getMessage());
         }
 
         $gallery->delete();

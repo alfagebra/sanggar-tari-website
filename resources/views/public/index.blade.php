@@ -16,9 +16,9 @@
     <div class="relative z-10 max-w-container-max mx-auto px-4 md:px-margin-desktop w-full">
         <div class="max-w-2xl bg-black/65 backdrop-blur-md border-2 border-[#f2ca50]/50 p-8 md:p-12 rounded-3xl shadow-2xl">
             <p class="text-[#f2ca50] font-label-md text-label-md tracking-widest uppercase mb-4 animate-pulse font-bold">Warisan Budaya Jawi</p>
-            <h1 class="font-display-lg text-4xl md:text-5xl text-white font-black leading-tight mb-6 drop-shadow-md">Melestarikan Budaya, <br/><span class="text-[#f2ca50]">Menginspirasi</span> Generasi</h1>
+            <h1 class="font-display-lg text-4xl md:text-5xl text-white font-black leading-tight mb-6 drop-shadow-md">{!! nl2br(e($profile->hero_title ?? 'Melestarikan Budaya, Menginspirasi Generasi')) !!}</h1>
             <p class="font-body-lg text-body-lg text-slate-200 mb-8 max-w-xl leading-relaxed">
-                Gubug Seni Begog Kiyatdiharjan hadir sebagai episentrum pelestarian seni tari dan karawitan di lereng Candi Mlese, menjaga nyala api tradisi tetap berkobar bagi masa depan.
+                {{ $profile->hero_subtitle ?? 'Gubug Seni Begog Kiyatdiharjan hadir sebagai episentrum pelestarian seni tari dan karawitan di lereng Candi Mlese, menjaga nyala api tradisi tetap berkobar bagi masa depan.' }}
             </p>
             <div class="flex flex-wrap gap-4 md:gap-6">
                 <a href="{{ route('schedule.index') }}" class="bg-[#f2ca50] text-[#3c2f00] px-8 md:px-10 py-4 font-bold rounded-xl hover:brightness-110 shadow-lg transition-all inline-block">Jelajahi Program</a>
@@ -38,7 +38,7 @@
             </div>
             <!-- Float Decoration -->
             <div class="absolute -bottom-8 -right-8 bg-primary text-on-primary p-6 md:p-8 rounded-xl border-2 border-primary-container shadow-2xl hidden lg:block">
-                <p class="font-headline-md text-3xl md:text-4xl font-black mb-1">1998</p>
+                <p class="font-headline-md text-3xl md:text-4xl font-black mb-1">{{ $profile->founded_year ?? '1998' }}</p>
                 <p class="font-label-md text-xs font-black uppercase tracking-widest opacity-90">Tahun Berdiri</p>
             </div>
         </div>
@@ -49,10 +49,10 @@
                     {{ $profile->history ?? 'Gubug Seni Begog Kiyatdiharjan (GSBK) bukan sekadar sanggar seni, melainkan wujud pengabdian terhadap akar budaya Jawa yang luhur. Berawal dari kecintaan keluarga Kiyatdiharjan terhadap seni pertunjukan, kami bertransformasi menjadi pusat pembelajaran yang inklusif.' }}
                 </p>
                 <p class="font-body-md text-body-md text-on-surface-variant/80 italic border-l-4 border-primary pl-6 py-2">
-                    "Seni bukan sekadar tontonan, melainkan tuntunan hidup yang harus diwariskan dari satu tarikan napas ke tarikan napas berikutnya."
+                    "{{ $profile->quote_text ?? 'Seni bukan sekadar tontonan, melainkan tuntunan hidup yang harus diwariskan dari satu tarikan napas ke tarikan napas berikutnya.' }}"
                 </p>
                 <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
-                    Berlokasi tepat di kawasan bersejarah Candi Mlese, GSBK mengintegrasikan atmosfer sakral peninggalan masa lampau dengan semangat inovasi kontemporer, memastikan setiap gerakan tari dan ketukan gamelan memiliki makna yang dalam.
+                    {{ $profile->sejarah_subtitle ?? 'Berlokasi tepat di kawasan bersejarah Candi Mlese, GSBK mengintegrasikan atmosfer sakral peninggalan masa lampau dengan semangat inovasi kontemporer, memastikan setiap gerakan tari dan ketukan gamelan memiliki makna yang dalam.' }}
                 </p>
             </div>
         </div>
