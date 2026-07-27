@@ -182,6 +182,10 @@
                     <span class="material-symbols-outlined text-xl">calendar_month</span>
                     Kelola Jadwal
                 </a>
+                <a href="{{ route('admin.account') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm transition-all {{ request()->routeIs('admin.account') ? 'bg-[var(--admin-nav-active-bg)] text-[var(--admin-nav-active-text)]' : 'admin-text-color' }}">
+                    <span class="material-symbols-outlined text-xl">manage_accounts</span>
+                    Pengaturan Akun
+                </a>
                 <a href="{{ route('home') }}" target="_blank" class="flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm admin-muted-color transition-all">
                     <span class="material-symbols-outlined text-xl">open_in_new</span>
                     Lihat Website
@@ -238,6 +242,10 @@
                     <a href="{{ route('admin.schedules') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition-all {{ request()->routeIs('admin.schedules') || request()->routeIs('admin.schedules.*') ? 'bg-[var(--admin-nav-active-bg)] text-[var(--admin-nav-active-text)] border-l-4 border-[#b8860b] font-bold shadow-sm' : 'admin-text-color hover:bg-black/5 dark:hover:bg-white/5' }}">
                         <span class="material-symbols-outlined text-xl">calendar_month</span>
                         Kelola Jadwal
+                    </a>
+                    <a href="{{ route('admin.account') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition-all {{ request()->routeIs('admin.account') ? 'bg-[var(--admin-nav-active-bg)] text-[var(--admin-nav-active-text)] border-l-4 border-[#b8860b] font-bold shadow-sm' : 'admin-text-color hover:bg-black/5 dark:hover:bg-white/5' }}">
+                        <span class="material-symbols-outlined text-xl">manage_accounts</span>
+                        Pengaturan Akun
                     </a>
                     <a href="{{ route('home') }}" target="_blank" class="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm admin-muted-color hover:bg-black/5 dark:hover:bg-white/5 transition-all">
                         <span class="material-symbols-outlined text-xl">open_in_new</span>

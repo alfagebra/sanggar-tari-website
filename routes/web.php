@@ -44,6 +44,10 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/profil', [DashboardController::class, 'profileEdit'])->name('profile');
     Route::post('/profil', [DashboardController::class, 'profileUpdate'])->name('profile.update');
     
+    // Account Settings
+    Route::get('/akun', [DashboardController::class, 'accountEdit'])->name('account');
+    Route::post('/akun', [DashboardController::class, 'accountUpdate'])->name('account.update');
+    
     // Articles Management
     Route::get('/articles', [DashboardController::class, 'articles'])->name('articles');
     Route::get('/articles/create', [DashboardController::class, 'articleCreate'])->name('articles.create');

@@ -10,6 +10,9 @@ use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -277,5 +280,38 @@ class DashboardController extends Controller
         $schedule->delete();
 
         return redirect()->route('admin.schedules')->with('success', 'Jadwal latihan berhasil dihapus.');
+    }
+
+    // ==========================================
+    // ACCOUNT SETTINGS (ADMIN CREDENTIALS)
+    // ==========================================
+    public function accountEdit()
+    {
+        $user = Auth::user();
+        return view('admin.account', compact('user'));
+    }
+
+    public function accountUpdate(Request $request)
+    {
+        $user = Auth::user();
+
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+            'password' => 'nullable|string|min:8|confirmed',
+        ]);
+
+        $updateData = [
+            'name' => $data['name'],
+            'email' => $data['email'],
+        ];
+
+        if (!empty($data['password'])) {
+            $updateData['password'] = Hash::make($data['password']);
+        }
+
+        $user->update($updateData);
+
+        return redirect()->back()->with('success', 'Akun admin berhasil diperbarui.');
     }
 }
