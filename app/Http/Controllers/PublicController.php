@@ -46,27 +46,6 @@ class PublicController extends Controller
         return view('public.sitemap', compact('profile', 'articles', 'galleries', 'schedules'));
     }
 
-    public function terms()
-    {
-        $profile = Profile::first();
-        return view('public.terms', compact('profile'));
-    }
-
-    public function privacy()
-    {
-        $profile = Profile::first();
-        return view('public.privacy', compact('profile'));
-    }
-
-    public function sitemap()
-    {
-        $profile = Profile::first();
-        $articles = Article::latest()->get();
-        $galleries = Gallery::latest()->get();
-        $schedules = Schedule::orderBy('day')->get();
-        return view('public.sitemap', compact('profile', 'articles', 'galleries', 'schedules'));
-    }
-
     public function articles()
     {
         $articles = Article::latest()->paginate(6);
