@@ -21,9 +21,9 @@
             </div>
 
             <div>
-                <h3 class="font-headline-md text-xl md:text-2xl font-bold text-primary mb-4">2. Penggunaan Cookie (*Cookie Policy*)</h3>
+                <h3 class="font-headline-md text-xl md:text-2xl font-bold text-primary mb-4">2. Penggunaan Cookie (Cookie Policy)</h3>
                 <p class="font-body-md text-body-md">
-                    Website kami menggunakan **cookie** dan **localStorage** untuk menyimpan preferensi navigasi Anda, seperti pilihan tema (Light Cream vs Dark Obsidian). Cookie ini bersifat internal untuk kenyamanan penjelajahan Anda dan tidak melacak informasi sensitif di luar situs kami.
+                    Website kami menggunakan cookie dan localStorage untuk menyimpan preferensi navigasi Anda, seperti pilihan tema (Light Cream vs Dark Obsidian). Cookie ini bersifat internal untuk kenyamanan penjelajahan Anda dan tidak melacak informasi sensitif di luar situs kami.
                 </p>
             </div>
 
