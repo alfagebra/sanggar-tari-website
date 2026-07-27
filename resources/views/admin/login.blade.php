@@ -5,6 +5,16 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Login Pengelola - GSBK Candi</title>
     
+    <!-- Favicon (Browser Icon) -->
+    @php
+        $loginProfile = \App\Models\Profile::first();
+    @endphp
+    @if($loginProfile && $loginProfile->logo_url)
+        <link rel="icon" href="{{ Str::startsWith($loginProfile->logo_url, ['http://', 'https://']) ? $loginProfile->logo_url : Storage::url($loginProfile->logo_url) }}" type="image/x-icon">
+    @else
+        <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+    @endif
+    
     <!-- Theme Initializer (System Theme Detection & Sync) -->
     <script>
         (function() {

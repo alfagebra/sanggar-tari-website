@@ -4,6 +4,16 @@
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>@yield('title', 'GSBK Candi') - Gubug Seni Begog Kiyatdiharjan</title>
+    
+    <!-- Favicon (Browser Icon) -->
+    @php
+        $layoutProfile = \App\Models\Profile::first();
+    @endphp
+    @if($layoutProfile && $layoutProfile->logo_url)
+        <link rel="icon" href="{{ Str::startsWith($layoutProfile->logo_url, ['http://', 'https://']) ? $layoutProfile->logo_url : Storage::url($layoutProfile->logo_url) }}" type="image/x-icon">
+    @else
+        <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+    @endif
     <meta name="description" content="@yield('meta_description', 'Website Resmi Sanggar Seni Tari Tradisional. Menyediakan informasi profil, sejarah, galeri pentas, dan jadwal latihan tari.')">
     
     <!-- Theme Initializer (System Theme Detection & Sync) -->
@@ -133,10 +143,6 @@
     </style>
 </head>
 <body class="bg-background text-on-background batik-overlay selection:bg-primary-container selection:text-on-primary-container">
-
-    @php
-        $layoutProfile = \App\Models\Profile::first();
-    @endphp
 
     <!-- TopNavBar -->
     <header class="fixed top-0 left-0 w-full z-50 backdrop-blur-md border-b border-gold-subtle transition-colors duration-300">

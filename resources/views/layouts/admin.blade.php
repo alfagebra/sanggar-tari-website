@@ -5,6 +5,16 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>@yield('title', 'Admin Dashboard') - Panel Pengelola GSBK Candi</title>
     
+    <!-- Favicon (Browser Icon) -->
+    @php
+        $adminProfile = \App\Models\Profile::first();
+    @endphp
+    @if($adminProfile && $adminProfile->logo_url)
+        <link rel="icon" href="{{ Str::startsWith($adminProfile->logo_url, ['http://', 'https://']) ? $adminProfile->logo_url : Storage::url($adminProfile->logo_url) }}" type="image/x-icon">
+    @else
+        <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+    @endif
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     
@@ -118,10 +128,6 @@
     </style>
 </head>
 <body class="admin-bg-color admin-text-color batik-overlay min-h-screen transition-colors duration-300">
-
-    @php
-        $adminProfile = \App\Models\Profile::first();
-    @endphp
 
     <!-- Mobile Header Bar (Visible on mobile/tablet) -->
     <header class="md:hidden flex items-center justify-between p-4 border-b admin-border-color admin-sidebar-color transition-colors duration-300">
