@@ -10,6 +10,12 @@ use App\Http\Controllers\Admin\DashboardController;
 // ==========================================
 Route::get('/', [PublicController::class, 'index'])->name('home');
 Route::get('/profil', [PublicController::class, 'profile'])->name('profile');
+Route::get('/syarat-ketentuan', [PublicController::class, 'terms'])->name('terms');
+Route::get('/kebijakan-privasi', [PublicController::class, 'privacy'])->name('privacy');
+Route::get('/peta-situs', [PublicController::class, 'sitemap'])->name('sitemap');
+Route::get('/syarat-ketentuan', [PublicController::class, 'terms'])->name('terms');
+Route::get('/kebijakan-privasi', [PublicController::class, 'privacy'])->name('privacy');
+Route::get('/peta-situs', [PublicController::class, 'sitemap'])->name('sitemap');
 Route::get('/artikel', [PublicController::class, 'articles'])->name('articles.index');
 Route::get('/artikel/{slug}', [PublicController::class, 'articleDetail'])->name('articles.show');
 Route::get('/galeri', [PublicController::class, 'gallery'])->name('gallery.index');

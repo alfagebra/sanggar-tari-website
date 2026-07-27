@@ -248,9 +248,9 @@
                 <div>
                     <h5 class="font-label-md text-label-md text-on-surface mb-6 uppercase tracking-widest">Informasi</h5>
                     <ul class="space-y-4 font-body-md text-body-md text-on-surface-variant">
-                        <li><a class="hover:text-primary transition-colors" href="{{ route('profile') }}">Syarat & Ketentuan</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="{{ route('profile') }}">Kebijakan Privasi</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="{{ route('home') }}">Peta Situs</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="{{ route('terms') }}">Syarat & Ketentuan</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="{{ route('privacy') }}">Kebijakan Privasi</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="{{ route('sitemap') }}">Peta Situs</a></li>
                     </ul>
                 </div>
             </div>
@@ -340,5 +340,68 @@
             if (overlay) overlay.addEventListener('click', closeMobileMenu);
         });
     </script>
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-banner" class="fixed bottom-6 right-6 max-w-md bg-surface-container-low border-2 border-gold-subtle rounded-2xl p-6 shadow-2xl z-50 transform translate-y-12 opacity-0 transition-all duration-500 ease-out hidden">
+        <div class="flex items-start gap-4">
+            <span class="material-symbols-outlined text-primary text-3xl flex-shrink-0">cookie</span>
+            <div>
+                <h4 class="font-headline-md text-base font-bold text-on-surface mb-1">Kebijakan Cookie & Privasi</h4>
+                <p class="text-xs text-on-surface-variant leading-relaxed mb-4">
+                    Website kami menggunakan cookie untuk meningkatkan kenyamanan penjelajahan Anda, menganalisis lalu lintas situs, dan menyimpan preferensi mode tampilan.
+                </p>
+                <div class="flex gap-3 justify-end">
+                    <button id="decline-cookies-btn" class="px-4 py-2 border border-gold-subtle hover:bg-black/5 dark:hover:bg-white/5 rounded-lg text-xs font-bold text-on-surface-variant transition-all cursor-pointer">
+                        Tolak
+                    </button>
+                    <button id="accept-cookies-btn" class="px-4 py-2 bg-primary text-on-primary hover:opacity-90 rounded-lg text-xs font-bold transition-all cursor-pointer">
+                        Terima Semua
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Consent Handler -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const banner = document.getElementById('cookie-banner');
+            const acceptBtn = document.getElementById('accept-cookies-btn');
+            const declineBtn = document.getElementById('decline-cookies-btn');
+
+            // Show banner if consent hasn't been set
+            if (!localStorage.getItem('cookie_consent')) {
+                setTimeout(() => {
+                    banner.classList.remove('hidden');
+                    setTimeout(() => {
+                        banner.classList.remove('translate-y-12', 'opacity-0');
+                        banner.classList.add('translate-y-0', 'opacity-100');
+                    }, 50);
+                }, 1500); // Popup 1.5 seconds after load
+            }
+
+            function hideBanner() {
+                banner.classList.remove('translate-y-0', 'opacity-100');
+                banner.classList.add('translate-y-12', 'opacity-0');
+                setTimeout(() => {
+                    banner.classList.add('hidden');
+                }, 500);
+            }
+
+            if (acceptBtn) {
+                acceptBtn.addEventListener('click', function() {
+                    localStorage.setItem('cookie_consent', 'accepted');
+                    hideBanner();
+                });
+            }
+
+            if (declineBtn) {
+                declineBtn.addEventListener('click', function() {
+                    localStorage.setItem('cookie_consent', 'declined');
+                    hideBanner();
+                });
+            }
+        });
+    </script>
+
 </body>
 </html>
