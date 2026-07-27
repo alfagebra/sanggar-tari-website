@@ -21,9 +21,9 @@
             </div>
 
             <div>
-                <h3 class="font-headline-md text-xl md:text-2xl font-bold text-primary mb-4">2. Program Latihan & Kelas</h3>
+                <h3 class="font-headline-md text-xl md:text-2xl font-bold text-primary mb-4">2. Kegiatan Latihan</h3>
                 <p class="font-body-md text-body-md">
-                    Setiap peserta didik yang mendaftar kelas tari atau karawitan diwajibkan mengikuti jadwal latihan resmi yang telah disepakati. Pendaftaran kelas resmi dapat dilakukan langsung melalui tautan WhatsApp pengelola resmi yang tertera pada halaman jadwal.
+                    Kegiatan latihan tari dan karawitan di Gubug Seni Begog Kiyatdiharjan bersifat sosial, kebudayaan, dan non-komersial. Ditujukan untuk melestarikan tradisi di kalangan anak-anak desa setempat secara sukarela tanpa dipungut biaya belajar (gratis).
                 </p>
             </div>
 

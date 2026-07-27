@@ -34,8 +34,8 @@
                                 </p>
                             </div>
                         </div>
-                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $profile->phone ?? '081234567890') }}?text=Halo%20GSBK%20Candi,%20saya%20ingin%20mendaftar%20kelas%20{{ urlencode($schedule->class_name) }}" target="_blank" class="bg-primary text-on-primary px-6 py-3 rounded-xl font-bold text-sm hover:brightness-110 transition-all inline-flex items-center gap-2 self-stretch md:self-auto justify-center shadow-sm">
-                            Daftar Kelas <span class="material-symbols-outlined text-base">send</span>
+                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $profile->phone ?? '081234567890') }}?text=Halo%20GSBK%20Candi,%20saya%20ingin%20bertanya%20mengenai%20kegiatan%20latihan%20{{ urlencode($schedule->class_name) }}" target="_blank" class="bg-primary text-on-primary px-6 py-3 rounded-xl font-bold text-sm hover:brightness-110 transition-all inline-flex items-center gap-2 self-stretch md:self-auto justify-center shadow-sm">
+                            Tanya Kegiatan <span class="material-symbols-outlined text-base">send</span>
                         </a>
                     </div>
                 @endforeach
