@@ -54,13 +54,13 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::post('/articles/store', [DashboardController::class, 'articleStore'])->name('articles.store');
     Route::get('/articles/edit/{id}', [DashboardController::class, 'articleEdit'])->name('articles.edit');
     Route::post('/articles/update/{id}', [DashboardController::class, 'articleUpdate'])->name('articles.update');
-    Route::post('/articles/destroy/{id}', [DashboardController::class, 'articleDestroy'])->name('articles.destroy');
+    Route::match(['post', 'delete'], '/articles/destroy/{id}', [DashboardController::class, 'articleDestroy'])->name('articles.destroy');
     
     // Galleries Management
     Route::get('/galleries', [DashboardController::class, 'galleries'])->name('galleries');
     Route::get('/galleries/create', [DashboardController::class, 'galleryCreate'])->name('galleries.create');
     Route::post('/galleries/store', [DashboardController::class, 'galleryStore'])->name('galleries.store');
-    Route::post('/galleries/destroy/{id}', [DashboardController::class, 'galleryDestroy'])->name('galleries.destroy');
+    Route::match(['post', 'delete'], '/galleries/destroy/{id}', [DashboardController::class, 'galleryDestroy'])->name('galleries.destroy');
     
     // Schedules Management
     Route::get('/schedules', [DashboardController::class, 'schedules'])->name('schedules');
@@ -68,5 +68,5 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::post('/schedules/store', [DashboardController::class, 'scheduleStore'])->name('schedules.store');
     Route::get('/schedules/edit/{id}', [DashboardController::class, 'scheduleEdit'])->name('schedules.edit');
     Route::post('/schedules/update/{id}', [DashboardController::class, 'scheduleUpdate'])->name('schedules.update');
-    Route::post('/schedules/destroy/{id}', [DashboardController::class, 'scheduleDestroy'])->name('schedules.destroy');
+    Route::match(['post', 'delete'], '/schedules/destroy/{id}', [DashboardController::class, 'scheduleDestroy'])->name('schedules.destroy');
 });
