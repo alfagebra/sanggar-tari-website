@@ -59,6 +59,71 @@
     </div>
 </section>
 
+<!-- Kesenian Section -->
+<section class="py-24 bg-surface-container" id="kesenian">
+    <div class="max-w-container-max mx-auto px-4 md:px-margin-desktop">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="text-primary font-label-md text-label-md tracking-widest uppercase mb-2 block font-bold">Empat Cabang Kesenian</span>
+            <h2 class="font-headline-lg text-3xl md:text-5xl font-black text-on-surface mb-6">Pilar Pelestarian Seni Budaya</h2>
+            <p class="font-body-lg text-body-lg text-on-surface-variant">Fokus pelestarian kesenian Jawa tradisional yang diajarkan secara sukarela bagi anak-anak di GSBK Candi.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Tari Card -->
+            <div class="bg-surface-container-low border border-gold-subtle p-8 rounded-2xl shadow-sm hover:border-primary/50 transition-all duration-300 flex flex-col justify-between group">
+                <div>
+                    <div class="w-12 h-12 bg-primary/10 text-primary border border-primary/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-on-primary transition-all duration-300">
+                        <span class="material-symbols-outlined text-2xl">performing_arts</span>
+                    </div>
+                    <h3 class="font-headline-md text-xl font-bold text-on-surface mb-3">Tari Tradisional</h3>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">
+                        Pengenalan dan latihan tari Jawa klasik Gaya Surakarta dan Yogyakarta bagi anak-anak desa guna melatih olah tubuh, kelenturan, dan keanggunan budi pekerti.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Karawitan Card -->
+            <div class="bg-surface-container-low border border-gold-subtle p-8 rounded-2xl shadow-sm hover:border-primary/50 transition-all duration-300 flex flex-col justify-between group">
+                <div>
+                    <div class="w-12 h-12 bg-primary/10 text-primary border border-primary/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-on-primary transition-all duration-300">
+                        <span class="material-symbols-outlined text-2xl">music_note</span>
+                    </div>
+                    <h3 class="font-headline-md text-xl font-bold text-on-surface mb-3">Seni Karawitan</h3>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">
+                        Pembelajaran dasar menabuh instrumen gamelan Jawa (slendro-pelog) dan melantunkan tembang sebagai pengiring ritme tari maupun pementasan mandiri.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Pedalangan Card -->
+            <div class="bg-surface-container-low border border-gold-subtle p-8 rounded-2xl shadow-sm hover:border-primary/50 transition-all duration-300 flex flex-col justify-between group">
+                <div>
+                    <div class="w-12 h-12 bg-primary/10 text-primary border border-primary/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-on-primary transition-all duration-300">
+                        <span class="material-symbols-outlined text-2xl">theater_comedy</span>
+                    </div>
+                    <h3 class="font-headline-md text-xl font-bold text-on-surface mb-3">Seni Pedalangan</h3>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">
+                        Pendidikan teknik mendalang, olah suara suluk, penataan Wayang Kulit, serta pemahaman filosofi lakon-lakon pewayangan warisan leluhur.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Ketoprak Card -->
+            <div class="bg-surface-container-low border border-gold-subtle p-8 rounded-2xl shadow-sm hover:border-primary/50 transition-all duration-300 flex flex-col justify-between group">
+                <div>
+                    <div class="w-12 h-12 bg-primary/10 text-primary border border-primary/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-on-primary transition-all duration-300">
+                        <span class="material-symbols-outlined text-2xl">groups</span>
+                    </div>
+                    <h3 class="font-headline-md text-xl font-bold text-on-surface mb-3">Ketoprak Jawa</h3>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">
+                        Seni teater tradisional rakyat Jawa yang memadukan olah peran, dialog bahasa krama, babad sejarah, serta humor ketoprak yang sarat pesan moral.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Jadwal & Lokasi -->
 <section class="py-32 bg-background relative overflow-hidden" id="jadwal">
     <div class="max-w-container-max mx-auto px-4 md:px-margin-desktop">

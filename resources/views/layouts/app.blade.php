@@ -155,9 +155,10 @@
                 {{ $layoutProfile->name ?? 'GSBK Candi' }}
             </a>
             
-            <!-- Navigation Links -->
+             <!-- Navigation Links -->
             <div class="hidden md:flex items-center gap-8 lg:gap-10">
                 <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="{{ route('home') }}#sejarah">Sejarah</a>
+                <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="{{ route('home') }}#kesenian">Kesenian</a>
                 <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="{{ route('articles.index') }}">Artikel</a>
                 <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="{{ route('gallery.index') }}">Galeri</a>
                 <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="{{ route('schedule.index') }}">Jadwal</a>
@@ -201,6 +202,7 @@
             <!-- Mobile Nav Links -->
             <nav class="flex flex-col space-y-4">
                 <a class="font-label-md text-body-lg text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-gold-subtle" href="{{ route('home') }}#sejarah" onclick="closeMobileMenu()">Sejarah</a>
+                <a class="font-label-md text-body-lg text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-gold-subtle" href="{{ route('home') }}#kesenian" onclick="closeMobileMenu()">Kesenian</a>
                 <a class="font-label-md text-body-lg text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-gold-subtle" href="{{ route('articles.index') }}" onclick="closeMobileMenu()">Artikel</a>
                 <a class="font-label-md text-body-lg text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-gold-subtle" href="{{ route('gallery.index') }}" onclick="closeMobileMenu()">Galeri</a>
                 <a class="font-label-md text-body-lg text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-gold-subtle" href="{{ route('schedule.index') }}" onclick="closeMobileMenu()">Jadwal</a>
