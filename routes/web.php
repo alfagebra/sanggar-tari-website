@@ -60,6 +60,8 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/galleries', [DashboardController::class, 'galleries'])->name('galleries');
     Route::get('/galleries/create', [DashboardController::class, 'galleryCreate'])->name('galleries.create');
     Route::post('/galleries/store', [DashboardController::class, 'galleryStore'])->name('galleries.store');
+    Route::get('/galleries/edit/{id}', [DashboardController::class, 'galleryEdit'])->name('galleries.edit');
+    Route::post('/galleries/update/{id}', [DashboardController::class, 'galleryUpdate'])->name('galleries.update');
     Route::match(['post', 'delete'], '/galleries/destroy/{id}', [DashboardController::class, 'galleryDestroy'])->name('galleries.destroy');
     
     // Schedules Management

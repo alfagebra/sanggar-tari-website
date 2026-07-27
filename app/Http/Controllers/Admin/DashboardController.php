@@ -205,6 +205,38 @@ class DashboardController extends Controller
         return redirect()->route('admin.galleries')->with('success', 'Foto baru berhasil ditambahkan ke galeri.');
     }
 
+    public function galleryEdit($id)
+    {
+        $gallery = Gallery::findOrFail($id);
+        return view('admin.galleries.edit', compact('gallery'));
+    }
+
+    public function galleryUpdate(Request $request, $id)
+    {
+        $gallery = Gallery::findOrFail($id);
+
+        $data = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:4096',
+        ]);
+
+        if ($request->hasFile('image')) {
+            try {
+                if ($gallery->image_url && !Str::startsWith($gallery->image_url, ['http://', 'https://'])) {
+                    Storage::disk(config('filesystems.default'))->delete($gallery->image_url);
+                }
+            } catch (\Exception $e) {
+                \Log::warning("Supabase S3 gallery update image delete failed: " . $e->getMessage());
+            }
+            $data['image_url'] = $request->file('image')->store('sanggar', config('filesystems.default'));
+        }
+
+        $gallery->update($data);
+
+        return redirect()->route('admin.galleries')->with('success', 'Foto galeri berhasil diperbarui.');
+    }
+
     public function galleryDestroy($id)
     {
         $gallery = Gallery::findOrFail($id);

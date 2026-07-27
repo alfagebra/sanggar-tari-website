@@ -28,13 +28,18 @@
                     <div class="p-4">
                         <h4 class="font-bold admin-text-color text-base mb-1 truncate">{{ $gallery->title }}</h4>
                         <p class="text-xs admin-muted-color line-clamp-2 mb-4">{{ $gallery->description ?? 'Dokumentasi Pentas' }}</p>
-                        <form action="{{ route('admin.galleries.destroy', $gallery->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus foto ini?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="w-full bg-red-500/10 border border-red-500/20 text-red-600 py-2 rounded-xl text-xs font-bold hover:bg-red-500/20 transition-all flex items-center justify-center gap-1.5">
-                                <span class="material-symbols-outlined text-sm">delete</span> Hapus Foto
-                            </button>
-                        </form>
+                        <div class="flex gap-2">
+                            <a href="{{ route('admin.galleries.edit', $gallery->id) }}" class="flex-1 bg-[#b8860b]/10 border border-[#b8860b]/20 text-[#b8860b] dark:text-[#f2ca50] dark:bg-[#f2ca50]/10 dark:border-[#f2ca50]/20 py-2 rounded-xl text-xs font-bold hover:brightness-110 transition-all flex items-center justify-center gap-1.5">
+                                <span class="material-symbols-outlined text-sm">edit</span> Edit
+                            </a>
+                            <form action="{{ route('admin.galleries.destroy', $gallery->id) }}" method="POST" class="flex-1" onsubmit="return confirm('Apakah Anda yakin ingin menghapus foto ini?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="w-full bg-red-500/10 border border-red-500/20 text-red-600 py-2 rounded-xl text-xs font-bold hover:bg-red-500/20 transition-all flex items-center justify-center gap-1.5">
+                                    <span class="material-symbols-outlined text-sm">delete</span> Hapus
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             @endforeach
