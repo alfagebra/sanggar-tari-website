@@ -73,7 +73,7 @@
             <div class="bg-surface-container-low border border-gold-subtle p-8 rounded-2xl shadow-sm hover:border-primary/50 transition-all duration-300 flex flex-col justify-between group">
                 <div>
                     <div class="w-12 h-12 bg-primary/10 text-primary border border-primary/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-on-primary transition-all duration-300">
-                        <span class="material-symbols-outlined text-2xl">performing_arts</span>
+                        <span class="material-symbols-outlined text-2xl">emoji_people</span>
                     </div>
                     <h3 class="font-headline-md text-xl font-bold text-on-surface mb-3">Tari Tradisional</h3>
                     <p class="text-sm text-on-surface-variant leading-relaxed">
