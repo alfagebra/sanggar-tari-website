@@ -40,46 +40,21 @@
         </div>
     </div>
 
-    <!-- Quick Access & Status Grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-        <!-- Welcome Banner Card -->
-        <div class="admin-card-color border admin-border-color p-8 rounded-2xl shadow-sm flex flex-col justify-between">
-            <div>
-                <span class="inline-block bg-amber-500/10 text-[#b8860b] dark:text-[#f2ca50] text-xs font-bold uppercase px-3 py-1 rounded-lg mb-4 border border-amber-500/20">PANEL ADMIN GSBK</span>
-                <h3 class="font-headline-md text-2xl font-bold admin-text-color mb-3">Selamat Bekerja!</h3>
-                <p class="admin-muted-color text-sm leading-relaxed mb-6">
-                    Melalui panel ini, Anda dapat mengelola profil sanggar tari, memperbarui jadwal latihan mingguan, mengunggah foto pentas, dan menulis artikel kebudayaan secara langsung.
-                </p>
-            </div>
-            <div>
-                <a href="{{ route('admin.profile') }}" class="inline-flex items-center gap-2 bg-[#b8860b] dark:bg-[#f2ca50] text-white dark:text-[#3c2f00] px-5 py-2.5 rounded-xl font-bold text-sm shadow-sm hover:opacity-95 transition-all">
-                    Edit Profil Sanggar <span class="material-symbols-outlined text-base">arrow_forward</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- Cloud System Status -->
-        <div class="admin-card-color border admin-border-color p-8 rounded-2xl shadow-sm">
-            <h3 class="font-headline-md text-xl font-bold admin-accent-color mb-6 flex items-center gap-2">
-                <span class="material-symbols-outlined text-2xl">cloud_done</span>
-                Status Integrasi Cloud
-            </h3>
-            <div class="space-y-4 text-sm font-medium">
-                <div class="flex justify-between items-center pb-3 border-b admin-border-color">
-                    <span class="admin-muted-color">Hosting Aplikasi:</span>
-                    <span class="font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5 bg-emerald-500/10 px-3 py-1 rounded-lg border border-emerald-500/20"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Vercel Serverless</span>
-                </div>
-                <div class="flex justify-between items-center pb-3 border-b admin-border-color">
-                    <span class="admin-muted-color">Database Engine:</span>
-                    <span class="font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5 bg-emerald-500/10 px-3 py-1 rounded-lg border border-emerald-500/20"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Supabase PostgreSQL</span>
-                </div>
-                <div class="flex justify-between items-center">
-                    <span class="admin-muted-color">Penyimpanan Foto (Bucket):</span>
-                    <span class="font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5 bg-emerald-500/10 px-3 py-1 rounded-lg border border-emerald-500/20"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Supabase Storage S3</span>
-                </div>
-            </div>
-        </div>
+    <!-- Welcome Banner Card -->
+<div class="admin-card-color border admin-border-color p-8 rounded-2xl shadow-sm mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+    <div class="max-w-2xl">
+        <span class="inline-block bg-amber-500/10 text-[#b8860b] dark:text-[#f2ca50] text-xs font-bold uppercase px-3 py-1 rounded-lg mb-4 border border-amber-500/20">PANEL ADMIN GSBK</span>
+        <h3 class="font-headline-md text-2xl font-bold admin-text-color mb-3">Selamat Bekerja!</h3>
+        <p class="admin-muted-color text-sm leading-relaxed">
+            Melalui panel ini, Anda dapat mengelola profil sanggar tari, memperbarui jadwal latihan mingguan, mengunggah foto pentas, dan menulis artikel kebudayaan secara langsung.
+        </p>
     </div>
+    <div class="shrink-0">
+        <a href="{{ route('admin.profile') }}" class="inline-flex items-center gap-2 bg-[#b8860b] dark:bg-[#f2ca50] text-white dark:text-[#3c2f00] px-5 py-2.5 rounded-xl font-bold text-sm shadow-sm hover:opacity-95 transition-all">
+            Edit Profil Sanggar <span class="material-symbols-outlined text-base">arrow_forward</span>
+        </a>
+    </div>
+</div>
 
     <!-- Recent Articles Table Container -->
     <div class="admin-card-color border admin-border-color rounded-2xl p-8 shadow-sm">
