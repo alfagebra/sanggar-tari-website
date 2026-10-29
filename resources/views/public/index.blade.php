@@ -172,7 +172,7 @@
             <!-- Location Map Marker Stylized -->
             <div class="bg-surface-container-high rounded-xl overflow-hidden border border-gold-subtle relative h-[400px] lg:h-auto" id="lokasi">
                 <div class="absolute inset-0 opacity-40 grayscale contrast-125">
-                    <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-HNQ7tiGpQ1qdd4tDq9Wk529yVoHsNvx_0z2VR5i8Q4wLr6vt5F79mXecDwFw24G3cyHDuW4dj6BxYvHosbYWNPZU15kwDp14GBvqr9mlm5pQw_rNaPuPmln6crASUfYcQmjNtDxZi1ToO65VeMEkOIvWUmaTm4fDpjyVstklZdyDQbvlBVjp6rVhhlOeiIrT6FEoZXPaVIv3Gs1NVlSsetHT_s0ZpNDCT6LhntMBiVp6WJ23ux2pAmGO0yM-XAXwiayX5XWMeA45" alt="Lokasi Sanggar"/>
+                    <img class="w-full h-full object-cover" src="https://maps.app.goo.gl/cwjYc9ywzyeTUmBb7" alt="Lokasi Sanggar"/>
                 </div>
                 <div class="relative z-10 p-8 h-full flex flex-col justify-end bg-gradient-to-t from-background to-transparent">
                     <div class="flex items-center gap-3 mb-4">
